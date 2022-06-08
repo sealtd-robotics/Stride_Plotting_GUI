@@ -1,4 +1,4 @@
-#Stride Plotting GUI Instructions
+# Stride Plotting GUI Instructions
 
 This file is a walkthrough for how to setup and run the GUI for plotting Stride data.
 
