@@ -33,7 +33,7 @@ To run the program from your environment run the following line:
 ```
 python Stride_Plotting_GUI.py
 ```
-The GUI should window should pop up.
+The GUI window should pop up.
 
 Using the GUI
 ---
