@@ -63,6 +63,7 @@ The GUI will intially pop up showing 3 empty listboxes(labeled Select CSV Files,
 
 * Note 1: If you are using Linux, the directory you select in the first window may not carry over to the second window. In this case, make sure to navigate to your directory again to select your .txt file. 
 <br/>
+
 * Note 2: When you are done with the figures, close them to resume using the GUI.
 
 Looking at Plots
