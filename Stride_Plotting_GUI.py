@@ -198,7 +198,6 @@ def return_values():
             Ayf = signal.filtfilt(b, a, Ay)     #Filter Ay
             yaw_rate_EST = velocity / radius * 180/pi  #desired yaw rate
             yaw_rate_filtered = signal.filtfilt(b,a,yaw_rate_deg) #Filter actual yaw rate
-
             #GPS and wheel speed plot variables (RL, RR, FL, FR)
             rwheel = 22/1000 #Wheel radius
             vel_RL = actual_RPM_RL * 2 * pi /60 * rwheel  #Compute wheel velocities using rpm and wheel radius
@@ -212,12 +211,11 @@ def return_values():
             
             #Create a dictionary for x and y axis variables
             var_dict = {'Time (sec)':time, "I_RL (A)": I_RL,"I_RR (A)":I_RR, "I_FL (A)":I_FL, "I_FR (A)":I_FR, "I_total (A)": I_total, "I_limit (A)": I_limit, "Ax (m/s^2)":Ax,
-            "Ay (m/s^2)":Ay, "Ayf (g)": Ayf, "AyEST2 (g)":AyEst2, "Yaw_Rate_Filtered (deg/sec)":yaw_rate_filtered, "East_vel (m/s)":east_vel, "North_vel (m/s)":north_vel, 
-            "Velocity_Magnitude (m/s)":velocity, "Vel_RL (m/s)":vel_RL, "Vel_RR (m/s)": vel_RR, "Vel_FL (m/s)": vel_FL, "Vel_FR (m/s)": vel_FR, "Actual_RPM_RL":actual_RPM_RL,
-            "Actual_RPM_RR":actual_RPM_RR, "Actual_RPM_FL":actual_RPM_FL, "Actual_RPM_FR":actual_RPM_FR, "Desired_RPM_RL":desired_RPM_RL, "Desired_RPM_RR":desired_RPM_RR,
-            "Desired_RPM_FL":desired_RPM_FL, "Desired_RPM_FR":desired_RPM_FR, "Battery_Temp (C)":bat_temp_C, "Robot_Temp (C)":robot_temp_C, 
-            "Winding_Temp_RL (C)":wind_temp_RL, "Winding_Temp_RR (C)":wind_temp_RR, "Winding_Temp_FL (C)":wind_temp_FL, "Winding_Temp_FR (C)":wind_temp_FR,
-            "Latitude (deg)":latitude, "Longitude (deg)":longitude}
+            "Ay (m/s^2)":Ay, "AyEST2 (g)":AyEst2, "Yaw Rate (deg)": yaw_rate_deg, "East_vel (m/s)":east_vel, "North_vel (m/s)":north_vel, "Velocity_Magnitude (m/s)":velocity, "Vel_RL (m/s)":vel_RL, 
+            "Vel_RR (m/s)": vel_RR, "Vel_FL (m/s)": vel_FL, "Vel_FR (m/s)": vel_FR, "Actual_RPM_RL":actual_RPM_RL, "Actual_RPM_RR":actual_RPM_RR, "Actual_RPM_FL":actual_RPM_FL, 
+            "Actual_RPM_FR":actual_RPM_FR, "Desired_RPM_RL":desired_RPM_RL, "Desired_RPM_RR":desired_RPM_RR, "Desired_RPM_FL":desired_RPM_FL, "Desired_RPM_FR":desired_RPM_FR, 
+            "Battery_Temp (C)":bat_temp_C, "Robot_Temp (C)":robot_temp_C, "Winding_Temp_RL (C)":wind_temp_RL, "Winding_Temp_RR (C)":wind_temp_RR, "Winding_Temp_FL (C)":wind_temp_FL, 
+            "Winding_Temp_FR (C)":wind_temp_FR, "Latitude (deg)":latitude, "Longitude (deg)":longitude}
            
             #For loop for adding variables to each listbox
             x_axis.delete(0,END)  #Delete listbox values and repopulate them so read csv button doesn't duplicate listbox entries
@@ -322,16 +320,32 @@ def return_values():
                     count = count +1
                 plt.show()
 
+            #Function to filter data by clicking button
+            def Filter_data():
+                for dictionary in dict_list:
+                    for item in x_axis.curselection() and y_axis.curselection(): #Filter items slected in x and y listboxes
+                        keys = keys_list[item]       #Get key string
+                        value = (dictionary[keys])   #Use key to get dict value
+                        #Filtering parameters
+                        dt = statistics.mode(np.diff(time)) #Cumpute mode of all delta t values
+                        Fs = 1/dt                           #Use mode to compute frequency
+                        b, a = signal.butter(4, 2/(Fs/2))   #Butterworth filter
+                        var_filtered = signal.filtfilt(b, a, value)   #Filter Each value sleected from x/y listboxes
+                        dictionary[keys]=var_filtered   #Replace dictionary values for each key filter
+
             #Adding more buttons to GUI at specific locations
             Plot_button = Button(root, text="Plot Y vs X", width=15, height=3, command= select_vars)
             TxT_File_Button = Button(root, text="Select/Plot Path", width=15, height=3, command= select_txt_file)
             Subplot_Button = Button(root, text= "Subplot Y vs X", width=15, height=3, command= make_subplot)
+            Filter_Button = Button(root, text= "Filter", width=15, height=3, command= Filter_data)
             Plot_button['font'] = myFont
             TxT_File_Button['font'] = myFont
             Subplot_Button['font'] = myFont
+            Filter_Button['font'] = myFont
             Plot_button.place(x=475, y=375)
             TxT_File_Button.place(x=275,y=375)
-            Subplot_Button.place(x=675,y=375)
+            Subplot_Button.place(x=675,y=325)
+            Filter_Button.place(x=675,y= 425)
 
 #Add textboxes above listboxes
 message1 = "Select X Axis Variable"   #Message above x variables
@@ -351,7 +365,7 @@ text_box_3.insert('end', message3)
 text_box_3.config(state='disabled')
 
 #Add button for reading csv file into program
-return_val_but = Button(root, text= "read csv", width=15, height=3, command= return_values)
+return_val_but = Button(root, text= "Read CSV", width=15, height=3, command= return_values)
 return_val_but['font'] = myFont
 return_val_but.place(x=75,y=325)
 

@@ -37,16 +37,16 @@ The GUI should window should pop up.
 
 Using the GUI
 ---
-The GUI will intially pop up showing 3 empty listboxes(labeled Select CSV Files, Select X axis variables, and Select Y axis variables) and 2 buttons (labeled Change Directory and read csv).
+The GUI will intially pop up showing 3 empty listboxes(labeled Select CSV Files, Select X axis variables, and Select Y axis variables) and 2 buttons (labeled 'Change Directory' and 'Read CSV').
 
-1. The first thing you will want to do is click the 'Change Directory' button. This will prompt you to select the folder containing the CSV file(s) you want to get data from. Once you have navigated to your folder, click select folder.
+1. The first thing you will want to do is click the 'Change Directory' button. This will prompt you to select the folder containing the CSV file(s) you want to get data from. Once you have navigated to your folder, click the confirmation button(could be 'select folder', 'open', 'ok', etc.).
 <br/>
 
-2. The CSV listbox will be populated with the names of each CSV file in the selected folder. Click on the CSV file(s) you would like to look at data for, and then click the 'read csv' button.
+2. The CSV listbox will be populated with the names of each CSV file in the selected folder. Click on the CSV file(s) you would like to look at data for, and then click the 'Read CSV' button.
 
-* Note: Repeat step 1 to choose a new directory. The X and Y variable listboxes values will clear until you repeat step 2. To look at different files in the same directory, simply select/deselect them from the CSV listbox and click 'read csv' again. This will also reset your X and Y variable listbox selections.
+* Note: Repeat step 1 to choose a new directory. The X and Y variable listboxes values will clear until you repeat step 2. To look at different files in the same directory, simply select/deselect them from the CSV listbox and click 'Read CSV' again. This will also reset your X and Y variable listbox selections.
 
-3. You will now see the X and Y variable listboxes populate with the variable names from the CSV files. 3 more buttons will also pop up (Select/Plot Path, Plot Y vs X, and Subplot Y vs X)
+3. You will now see the X and Y variable listboxes populate with the variable names from the CSV files. 4 more buttons will also pop up (Select/Plot Path, Plot Y vs X, and Subplot Y vs X, and Filter)
 <br/>
 
 4. To plot or subplot data, you will need to select your x and y axis variables from the corresponding listboxes. The 'X Axis Variable' listbox allows one selection at a time, with the default selection being 'Time (sec)'. The 'Y Axis Variable' listbox allows you to select as many variables as you want at a time. Each selected variable in this listbox will be highlighted, and clicking a variable again will deselect it. 
@@ -56,11 +56,13 @@ The GUI will intially pop up showing 3 empty listboxes(labeled Select CSV Files,
 
 * Note: When you are done with the figure, close it to resume using the GUI. 
 
-6. If you would like to plot the Desired and Actual path of STRIDE, click the 'Select/Plot Path' button. You will be prompted to select the folder containing the path file (.txt) in the same way you selected a folder in step 1. Then you should see a window with the .txt files in the folder. Click the one you want and then press 'Open' (or double click the .txt file). A plot will automatically pop up in a new window for each CSV. 
+6. If you would like to apply a filter to your selected data before plotting, then you can click the 'Filter' button and then plot/subplot as normal. This will update the values of items selected in the lisbox. If you deselect an item from the listbox, the variable will remain filtered even if reselect it. To remove the filter from the data you will need to click 'Read CSV' again and reselect listbox values. 
+<br/> 
+
+7. If you would like to plot the Desired and Actual path of STRIDE, click the 'Select/Plot Path' button. You will be prompted to select the folder containing the path file (.txt) in the same way you selected a folder in step 1. Then you should see a window with the .txt files in the folder. Click the one you want and then press 'Open' (or double click the .txt file). A plot will automatically pop up in a new window for each CSV. 
 
 * Note 1: If you are using Linux, the directory you select in the first window may not carry over to the second window. In this case, make sure to navigate to your directory again to select your .txt file. 
 <br/>
-
 * Note 2: When you are done with the figures, close them to resume using the GUI.
 
 Looking at Plots
