@@ -29,11 +29,12 @@ pip install scipy
 
 Running the Program
 ---
-To run the program from your environment run the following line: 
+To run the program from your environment run the following lines: 
 ```
+cd script_directory
 python Stride_Plotting_GUI.py
 ```
-The GUI window should pop up.
+The script_directory is the path of the folder containing Stride_Plotting_GUI.py. The GUI window should pop up. For example, `cd C:\Stride\Python\Stride_Plotting_GUI`.
 
 Using the GUI
 ---
