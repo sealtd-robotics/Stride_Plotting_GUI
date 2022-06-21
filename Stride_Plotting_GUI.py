@@ -109,12 +109,9 @@ def return_values():
             time = time_milli / 1000
             general_status= Read_file["general_status"]
             drive_status = Read_file["drive_status"]
-            gnss1 = Read_file["gnss1"]
-            gnss2 = Read_file["gnss2"]
-            dual_gnss = Read_file["dual_gnss"]
 
             #Location Variables
-            heading_unc = Read_file["heading_unc"]
+            #heading_unc = Read_file["heading_unc"]
             latitude = Read_file["latitude(deg)"]
             longitude = Read_file["longitude(deg)"]
             altitude = Read_file["altitude(m)"]
@@ -144,8 +141,8 @@ def return_values():
             accel_z = Read_file["Az(m/s^2)"]
 
             #desired vs actual values
-            desired_steering = Read_file["desired_steering(deg)"]
-            desired_vel = Read_file["desired_velocity(ms)"]
+            desired_omega = Read_file["desired_omega(rad/s)"]
+            desired_vel = Read_file["desired_velocity(m/s)"]
             actual_RPM_RL = Read_file["actual_rpm_RL"]
             desired_RPM_RL = Read_file["desired_rpm_RL"]
             actual_RPM_RR = Read_file["actual_rpm_RR"]
@@ -190,14 +187,8 @@ def return_values():
             yaw_rate_deg = yaw_rate * 180/pi  #Convert yaw rate to degrees
             AyEst1 = np.square(velocity) * radius / g  #V^2 /r
             AyEst2 = velocity * yaw_rate / g  #Velocity * Yaw rate
+            omega_actual = -yaw_rate
 
-            #Filtering parameters
-            dt = statistics.mode(np.diff(time)) #Cumpute mode of all delta t values
-            Fs = 1/dt                           #Use mode to compute frequency
-            b, a = signal.butter(4, 2/(Fs/2))   #Butterworth filter
-            Ayf = signal.filtfilt(b, a, Ay)     #Filter Ay
-            yaw_rate_EST = velocity / radius * 180/pi  #desired yaw rate
-            yaw_rate_filtered = signal.filtfilt(b,a,yaw_rate_deg) #Filter actual yaw rate
             #GPS and wheel speed plot variables (RL, RR, FL, FR)
             rwheel = 22/1000 #Wheel radius
             vel_RL = actual_RPM_RL * 2 * pi /60 * rwheel  #Compute wheel velocities using rpm and wheel radius
@@ -211,10 +202,10 @@ def return_values():
             
             #Create a dictionary for x and y axis variables
             var_dict = {'Time (sec)':time, "I_RL (A)": I_RL,"I_RR (A)":I_RR, "I_FL (A)":I_FL, "I_FR (A)":I_FR, "I_total (A)": I_total, "I_limit (A)": I_limit, "Ax (m/s^2)":Ax,
-            "Ay (m/s^2)":Ay, "AyEST2 (g)":AyEst2, "Yaw Rate (deg)": yaw_rate_deg, "East_vel (m/s)":east_vel, "North_vel (m/s)":north_vel, "Velocity_Magnitude (m/s)":velocity, "Vel_RL (m/s)":vel_RL, 
-            "Vel_RR (m/s)": vel_RR, "Vel_FL (m/s)": vel_FL, "Vel_FR (m/s)": vel_FR, "Actual_RPM_RL":actual_RPM_RL, "Actual_RPM_RR":actual_RPM_RR, "Actual_RPM_FL":actual_RPM_FL, 
-            "Actual_RPM_FR":actual_RPM_FR, "Desired_RPM_RL":desired_RPM_RL, "Desired_RPM_RR":desired_RPM_RR, "Desired_RPM_FL":desired_RPM_FL, "Desired_RPM_FR":desired_RPM_FR, 
-            "Battery_Temp (C)":bat_temp_C, "Robot_Temp (C)":robot_temp_C, "Winding_Temp_RL (C)":wind_temp_RL, "Winding_Temp_RR (C)":wind_temp_RR, "Winding_Temp_FL (C)":wind_temp_FL, 
+            "Ay (m/s^2)":Ay, "AyEST2 (g)":AyEst2, "Yaw Rate (rad/s)": yaw_rate, "Yaw Rate (deg)": yaw_rate_deg, "Desired Omega (rad/s)":desired_omega, "Actual Omega (rad/s)": omega_actual, "Desired Velocity (m/s)": desired_vel, 
+            "East_vel (m/s)":east_vel, "North_vel (m/s)":north_vel, "Velocity_Magnitude (m/s)":velocity, "Vel_RL (m/s)":vel_RL, "Vel_RR (m/s)": vel_RR, "Vel_FL (m/s)": vel_FL, "Vel_FR (m/s)": vel_FR, "Actual_RPM_RL":actual_RPM_RL, 
+            "Actual_RPM_RR":actual_RPM_RR, "Actual_RPM_FL":actual_RPM_FL, "Actual_RPM_FR":actual_RPM_FR, "Desired_RPM_RL":desired_RPM_RL, "Desired_RPM_RR":desired_RPM_RR, "Desired_RPM_FL":desired_RPM_FL, 
+            "Desired_RPM_FR":desired_RPM_FR, "Battery_Temp (C)":bat_temp_C, "Robot_Temp (C)":robot_temp_C, "Winding_Temp_RL (C)":wind_temp_RL, "Winding_Temp_RR (C)":wind_temp_RR, "Winding_Temp_FL (C)":wind_temp_FL, 
             "Winding_Temp_FR (C)":wind_temp_FR, "Latitude (deg)":latitude, "Longitude (deg)":longitude}
            
             #For loop for adding variables to each listbox
@@ -288,6 +279,7 @@ def return_values():
                     plt.plot(M_East, M_North, label= 'Desired')
                     plt.gca().xaxis.set_major_locator(plt.MultipleLocator(5))   #Set x_axis tick mark step to 5
                     plt.gca().yaxis.set_major_locator(plt.MultipleLocator(5))   #Set y_axis tick mark step to 5
+                    plt.gca().set_aspect("equal") #Set aspect ratio for plot axes equal to make path look like it does in real life
                     plt.title('Actual vs Desired Path of %s' % csv_name)        #Plot labels
                     plt.xlabel('East (m)')
                     plt.ylabel('North (m)')
