@@ -1,7 +1,7 @@
 ###Python Plotting
 
 #Import needed libraries
-from cmath import cos, pi, sin, sqrt
+from math import cos, pi, sin, sqrt
 from itertools import count
 import pandas as pd
 import numpy as np
