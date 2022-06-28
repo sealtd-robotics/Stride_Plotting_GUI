@@ -107,32 +107,33 @@ def return_values():
             time_milli = Read_file["utc_time(millisec)"] 
             time_milli = time_milli - time_milli[1]   #Convert time into seconds
             time = time_milli / 1000
-            general_status= Read_file["general_status"]
-            drive_status = Read_file["drive_status"]
+            #general_status= Read_file["general_status"]
+            #drive_status = Read_file["drive_status"]
 
             #Location Variables
             #heading_unc = Read_file["heading_unc"]
             latitude = Read_file["latitude(deg)"]
             longitude = Read_file["longitude(deg)"]
-            altitude = Read_file["altitude(m)"]
-            east = Read_file["east(m)"]
-            north = Read_file["north(m)"]
-            heading = Read_file["heading(deg)"]
-            goal_east = Read_file["goal_east(m)"]
-            goal_north = Read_file["goal_north(m)"]
-            lookahead = Read_file["lookahead(m)"]
+            cross_track_error = Read_file["cte(m)"]
+            #altitude = Read_file["altitude(m)"]
+            #east = Read_file["east(m)"]
+            #north = Read_file["north(m)"]
+            #heading = Read_file["heading(deg)"]
+            #goal_east = Read_file["goal_east(m)"]
+            #goal_north = Read_file["goal_north(m)"]
+            #lookahead = Read_file["lookahead(m)"]
 
             #Velocities
-            long_vel = Read_file["vel_longitudinal(m/s)"]
-            lat_vel = Read_file["vel_lateral(m/s)"]
+            #long_vel = Read_file["vel_longitudinal(m/s)"]
+            #lat_vel = Read_file["vel_lateral(m/s)"]
             east_vel = Read_file["vel_east(m/s)"]
             north_vel = Read_file["vel_north(m/s)"]
-            heading = Read_file["heading(deg)"]
+            #heading = Read_file["heading(deg)"]
 
             #roll pitch yaw
-            roll = Read_file["roll(deg)"]
-            pitch = Read_file["pitch(deg)"]
-            yaw = Read_file["yaw(deg"]
+            #roll = Read_file["roll(deg)"]
+            #pitch = Read_file["pitch(deg)"]
+            #yaw = Read_file["yaw(deg"]
             yaw_rate = Read_file["yaw_rate(rad/s)"]
 
             #accerlerations
@@ -202,10 +203,10 @@ def return_values():
             
             #Create a dictionary for x and y axis variables
             var_dict = {'Time (sec)':time, "I_RL (A)": I_RL,"I_RR (A)":I_RR, "I_FL (A)":I_FL, "I_FR (A)":I_FR, "I_total (A)": I_total, "I_limit (A)": I_limit, "Ax (m/s^2)":Ax,
-            "Ay (m/s^2)":Ay, "AyEST2 (g)":AyEst2, "Yaw Rate (rad/s)": yaw_rate, "Yaw Rate (deg)": yaw_rate_deg, "Desired Omega (rad/s)":desired_omega, "Actual Omega (rad/s)": omega_actual, "Desired Velocity (m/s)": desired_vel, 
+            "Ay (m/s^2)":Ay, "AyEST2 (g)":AyEst2, "Yaw Rate (rad/s)": yaw_rate, "Yaw Rate (deg)": yaw_rate_deg, "Actual Omega (rad/s)": omega_actual, "Desired Omega (rad/s)":desired_omega, "Desired Velocity (m/s)": desired_vel, 
             "East_vel (m/s)":east_vel, "North_vel (m/s)":north_vel, "Velocity_Magnitude (m/s)":velocity, "Vel_RL (m/s)":vel_RL, "Vel_RR (m/s)": vel_RR, "Vel_FL (m/s)": vel_FL, "Vel_FR (m/s)": vel_FR, "Actual_RPM_RL":actual_RPM_RL, 
             "Actual_RPM_RR":actual_RPM_RR, "Actual_RPM_FL":actual_RPM_FL, "Actual_RPM_FR":actual_RPM_FR, "Desired_RPM_RL":desired_RPM_RL, "Desired_RPM_RR":desired_RPM_RR, "Desired_RPM_FL":desired_RPM_FL, 
-            "Desired_RPM_FR":desired_RPM_FR, "Battery_Temp (C)":bat_temp_C, "Robot_Temp (C)":robot_temp_C, "Winding_Temp_RL (C)":wind_temp_RL, "Winding_Temp_RR (C)":wind_temp_RR, "Winding_Temp_FL (C)":wind_temp_FL, 
+            "Desired_RPM_FR":desired_RPM_FR, "Cross Track Error (m)":cross_track_error, "Battery_Temp (C)":bat_temp_C, "Robot_Temp (C)":robot_temp_C, "Winding_Temp_RL (C)":wind_temp_RL, "Winding_Temp_RR (C)":wind_temp_RR, "Winding_Temp_FL (C)":wind_temp_FL, 
             "Winding_Temp_FR (C)":wind_temp_FR, "Latitude (deg)":latitude, "Longitude (deg)":longitude}
            
             #For loop for adding variables to each listbox
