@@ -27,7 +27,7 @@ root.config(bg= "white")
 #Set up figure
 plt.rcParams["figure.figsize"] = [10.00, 5.00]
 plt.rcParams["figure.autolayout"] = True
-plt.rc('axes', prop_cycle=(cycler('color', ['r', 'g', 'b', 'y','c','k','m','orange','pink','purple','gray','brown','limegreen'])))  #Cycle through line colors for plotting
+plt.rc('axes', prop_cycle=(cycler('color', ['r', 'b', 'k', 'g','c','y','m','orange','pink','purple','gray','brown','limegreen'])))  #Cycle through line colors for plotting
 
 ###Adding to GUI
 #Creation of frames
@@ -174,20 +174,15 @@ def return_values():
             I_total = I_RL + I_RR + I_FL + I_FR    #Total current
             I_limit = np.linspace(48,48,len(time)) #Make constant I_limit value into a vector with same size as a column of data in csv
 
-            #Variables for accleration plots
-            g = 9.81            #Gravity constant
-            Ax = accel_x / g    #Factor in g to accelerations
-            Ay = accel_y / g
-            Az = accel_z / g
-
             #Lateral Accerleration for IMU and V*YawRate
+            g = 9.81 #Gravity constant
             east_vel_squared = np.square(east_vel) #Compute square velocities for north and south
             north_vel_squared = np.square(north_vel)
             velocity = np.sqrt(east_vel_squared + north_vel_squared) #Get magnitude of velocity
             radius = 30.5 / 2  #Path radius
             yaw_rate_deg = yaw_rate * 180/pi  #Convert yaw rate to degrees
             AyEst1 = np.square(velocity) * radius / g  #V^2 /r
-            AyEst2 = velocity * yaw_rate / g  #Velocity * Yaw rate
+            #AyEst2 = velocity * yaw_rate / g  #Velocity * Yaw rate
             omega_actual = -yaw_rate
 
             #GPS and wheel speed plot variables (RL, RR, FL, FR)
@@ -202,8 +197,8 @@ def return_values():
             robot_temp_C = (robot_temp - 32) * (5/9) 
             
             #Create a dictionary for x and y axis variables
-            var_dict = {'Time (sec)':time, "I_RL (A)": I_RL,"I_RR (A)":I_RR, "I_FL (A)":I_FL, "I_FR (A)":I_FR, "I_total (A)": I_total, "I_limit (A)": I_limit, "Ax (m/s^2)":Ax,
-            "Ay (m/s^2)":Ay, "AyEST2 (g)":AyEst2, "Yaw Rate (rad/s)": yaw_rate, "Yaw Rate (deg)": yaw_rate_deg, "Actual Omega (rad/s)": omega_actual, "Desired Omega (rad/s)":desired_omega, "Desired Velocity (m/s)": desired_vel, 
+            var_dict = {'Time (sec)':time, "I_RL (A)": I_RL,"I_RR (A)":I_RR, "I_FL (A)":I_FL, "I_FR (A)":I_FR, "I_total (A)": I_total, "I_limit (A)": I_limit, "Ax (m/s^2)":accel_x,
+            "Ay (m/s^2)":accel_y, "Yaw Rate (rad/s)": yaw_rate, "Yaw Rate (deg)": yaw_rate_deg, "Actual Omega (rad/s)": omega_actual, "Desired Omega (rad/s)":desired_omega, "Desired Velocity (m/s)": desired_vel, 
             "East_vel (m/s)":east_vel, "North_vel (m/s)":north_vel, "Velocity_Magnitude (m/s)":velocity, "Vel_RL (m/s)":vel_RL, "Vel_RR (m/s)": vel_RR, "Vel_FL (m/s)": vel_FL, "Vel_FR (m/s)": vel_FR, "Actual_RPM_RL":actual_RPM_RL, 
             "Actual_RPM_RR":actual_RPM_RR, "Actual_RPM_FL":actual_RPM_FL, "Actual_RPM_FR":actual_RPM_FR, "Desired_RPM_RL":desired_RPM_RL, "Desired_RPM_RR":desired_RPM_RR, "Desired_RPM_FL":desired_RPM_FL, 
             "Desired_RPM_FR":desired_RPM_FR, "Cross Track Error (m)":cross_track_error, "Battery_Temp (C)":bat_temp_C, "Robot_Temp (C)":robot_temp_C, "Winding_Temp_RL (C)":wind_temp_RL, "Winding_Temp_RR (C)":wind_temp_RR, "Winding_Temp_FL (C)":wind_temp_FL, 
