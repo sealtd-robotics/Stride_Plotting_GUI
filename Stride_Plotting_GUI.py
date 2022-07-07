@@ -115,6 +115,8 @@ def return_values():
             latitude = Read_file["latitude(deg)"]
             longitude = Read_file["longitude(deg)"]
             cross_track_error = Read_file["cte(m)"]
+            adj_rpm_l = Read_file["adj_rpm_L"]
+            adj_rpm_r = Read_file["adj_rpm_R"]
             #altitude = Read_file["altitude(m)"]
             #east = Read_file["east(m)"]
             #north = Read_file["north(m)"]
@@ -201,8 +203,8 @@ def return_values():
             "Ay (m/s^2)":accel_y, "Yaw Rate (rad/s)": yaw_rate, "Yaw Rate (deg)": yaw_rate_deg, "Actual Omega (rad/s)": omega_actual, "Desired Omega (rad/s)":desired_omega, "Desired Velocity (m/s)": desired_vel, 
             "East_vel (m/s)":east_vel, "North_vel (m/s)":north_vel, "Velocity_Magnitude (m/s)":velocity, "Vel_RL (m/s)":vel_RL, "Vel_RR (m/s)": vel_RR, "Vel_FL (m/s)": vel_FL, "Vel_FR (m/s)": vel_FR, 
             "Actual_RPM_RL":actual_RPM_RL, "Actual_RPM_RR":actual_RPM_RR, "Actual_RPM_FL":actual_RPM_FL, "Actual_RPM_FR":actual_RPM_FR, "Desired_RPM_RL":desired_RPM_RL, "Desired_RPM_RR":desired_RPM_RR, 
-            "Desired_RPM_FL":desired_RPM_FL, "Desired_RPM_FR":desired_RPM_FR, "Cross Track Error (m)":cross_track_error, "Battery_Temp (C)":bat_temp_C, "Robot_Temp (C)":robot_temp_C, "Winding_Temp_RL (C)":wind_temp_RL, 
-            "Winding_Temp_RR (C)":wind_temp_RR, "Winding_Temp_FL (C)":wind_temp_FL, "Winding_Temp_FR (C)":wind_temp_FR, "Latitude (deg)":latitude, "Longitude (deg)":longitude}
+            "Desired_RPM_FL":desired_RPM_FL, "Desired_RPM_FR":desired_RPM_FR, "Cross Track Error (m)":cross_track_error, "Left Wheel RPM adj": adj_rpm_l, "Right Wheel RPM adj": adj_rpm_r, "Battery_Temp (C)":bat_temp_C,
+            "Robot_Temp (C)":robot_temp_C, "Winding_Temp_RL (C)":wind_temp_RL, "Winding_Temp_RR (C)":wind_temp_RR, "Winding_Temp_FL (C)":wind_temp_FL, "Winding_Temp_FR (C)":wind_temp_FR, "Latitude (deg)":latitude, "Longitude (deg)":longitude}
            
             #For loop for adding variables to each listbox
             x_axis.delete(0,END)  #Delete listbox values and repopulate them so read csv button doesn't duplicate listbox entries
