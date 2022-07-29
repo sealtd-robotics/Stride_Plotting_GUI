@@ -3,6 +3,7 @@
 #Import needed libraries
 from math import cos, pi, sin, sqrt
 from itertools import count
+from operator import truediv
 import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
@@ -27,7 +28,7 @@ root.config(bg= "white")
 #Set up figure
 plt.rcParams["figure.figsize"] = [10.00, 5.00]
 plt.rcParams["figure.autolayout"] = True
-plt.rc('axes', prop_cycle=(cycler('color', ['r', 'b', 'k', 'g','c','y','m','orange','pink','purple','gray','brown','limegreen'])))  #Cycle through line colors for plotting
+plt.rc('axes', prop_cycle=(cycler('color', ['r', 'b', 'k', 'g','magenta','orange','c','purple','gray','brown','limegreen'])))  #Cycle through line colors for plotting
 
 ###Adding to GUI
 #Creation of frames
@@ -86,7 +87,7 @@ def change_directory():
     x_axis.delete(0,END)  #Delete listbox values and repopulate them so user doesn't plot old data by accident
     y_axis.delete(0,END)
 
-#Creat font for buttons
+#Create font for buttons
 myFont = font.Font(weight="bold")
 
 #Add button for changing directory to GUI
@@ -120,7 +121,7 @@ def return_values():
             #altitude = Read_file["altitude(m)"]
             #east = Read_file["east(m)"]
             #north = Read_file["north(m)"]
-            #heading = Read_file["heading(deg)"]
+            heading = Read_file["heading(deg)"]
             #goal_east = Read_file["goal_east(m)"]
             #goal_north = Read_file["goal_north(m)"]
             #lookahead = Read_file["lookahead(m)"]
@@ -134,7 +135,7 @@ def return_values():
 
             #roll pitch yaw
             #roll = Read_file["roll(deg)"]
-            #pitch = Read_file["pitch(deg)"]
+            pitch = Read_file["pitch(deg)"]
             #yaw = Read_file["yaw(deg"]
             yaw_rate = Read_file["yaw_rate(rad/s)"]
 
@@ -204,7 +205,8 @@ def return_values():
             "East_vel (m/s)":east_vel, "North_vel (m/s)":north_vel, "Velocity_Magnitude (m/s)":velocity, "Vel_RL (m/s)":vel_RL, "Vel_RR (m/s)": vel_RR, "Vel_FL (m/s)": vel_FL, "Vel_FR (m/s)": vel_FR, 
             "Actual_RPM_RL":actual_RPM_RL, "Actual_RPM_RR":actual_RPM_RR, "Actual_RPM_FL":actual_RPM_FL, "Actual_RPM_FR":actual_RPM_FR, "Desired_RPM_RL":desired_RPM_RL, "Desired_RPM_RR":desired_RPM_RR, 
             "Desired_RPM_FL":desired_RPM_FL, "Desired_RPM_FR":desired_RPM_FR, "Cross Track Error (m)":cross_track_error, "Left Wheel RPM adj": adj_rpm_l, "Right Wheel RPM adj": adj_rpm_r, "Battery_Temp (C)":bat_temp_C,
-            "Robot_Temp (C)":robot_temp_C, "Winding_Temp_RL (C)":wind_temp_RL, "Winding_Temp_RR (C)":wind_temp_RR, "Winding_Temp_FL (C)":wind_temp_FL, "Winding_Temp_FR (C)":wind_temp_FR, "Latitude (deg)":latitude, "Longitude (deg)":longitude}
+            "Robot_Temp (C)":robot_temp_C, "Winding_Temp_RL (C)":wind_temp_RL, "Winding_Temp_RR (C)":wind_temp_RR, "Winding_Temp_FL (C)":wind_temp_FL, "Winding_Temp_FR (C)":wind_temp_FR, "Latitude (deg)":latitude, 
+            "Longitude (deg)":longitude, "Pitch (deg)": pitch, "Heading (deg)": heading}
            
             #For loop for adding variables to each listbox
             x_axis.delete(0,END)  #Delete listbox values and repopulate them so read csv button doesn't duplicate listbox entries
@@ -235,9 +237,10 @@ def return_values():
                 #Show plot
                 plt.legend(bbox_to_anchor=(1.04,1), loc= "upper left") #Set legend to be outside of plot
                 plt.grid(True) #Add plot grid
-                plt.show() #Show plots
+                plt.show() #Show plots           
 
             def select_txt_file():
+                pd.set_option('display.float_format', '{:.17f}'.format)  #Keep 17 decimal places like .txt file has
                 folder2 = fd.askdirectory(title="Select TXT File's Folder") #Open directory
                 filepath2 = fd.askopenfilename(title = "Select a TXT file",filetypes = (("TXT Files","*.txt"),))  #Get user to open the txt file
                 Filename_txt = os.path.basename(filepath2)  #Get file name from file path
