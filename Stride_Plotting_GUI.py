@@ -258,8 +258,11 @@ def return_values():
                     longitude_path = path_dict.get("Longitude (deg)")
                 
                     #Create variables to plot actual and desired path variables
-                    RefLat = latitude_path[0]    #Set refernece value equal to first latitude value
-                    RefLong = longitude_path[0]  #Set reference value equal to first longitude value
+                    #RefLat = latitude_path[0]    #Set refernece value equal to first latitude value
+                    #RefLong = longitude_path[0]  #Set reference value equal to first longitude value
+                    RefLat = Mlat[0]    #Set refernece value equal to first latitude value
+                    RefLong = Mlong[0]  #Set reference value equal to first longitude value
+                        
                         
                     def func_LL2NE(RefLat,RefLong, latitude, longitude): #Some conversion formula obtained from GeneSys documentation
                         e = 0.0818191908426; #Some constant
