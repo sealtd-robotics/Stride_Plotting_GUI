@@ -88,7 +88,7 @@ The 'Select/Plot Path', 'Plot Y vs X', and 'Subplot Y vs X' buttons all use 'mat
 
 - The line graph icon will allow you to set several axis and curve paramaters, such as axis start and end values, labels, scale, line styles, and markers. 
 
-* Note: This button does not appear on linux for me (Matplotlib version 3.5.2). I'm not sure why.
+    * Note: This button does not appear on linux for me (Matplotlib version 3.5.2). I'm not sure why.
 <br/>
 
 - The last button is the save button, which will allow you to save the figure.
