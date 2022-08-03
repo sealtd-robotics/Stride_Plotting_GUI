@@ -118,25 +118,14 @@ def return_values():
             cross_track_error = Read_file["cte(m)"]
             adj_rpm_l = Read_file["adj_rpm_L"]
             adj_rpm_r = Read_file["adj_rpm_R"]
-            #altitude = Read_file["altitude(m)"]
-            #east = Read_file["east(m)"]
-            #north = Read_file["north(m)"]
             heading = Read_file["heading(deg)"]
-            #goal_east = Read_file["goal_east(m)"]
-            #goal_north = Read_file["goal_north(m)"]
-            #lookahead = Read_file["lookahead(m)"]
 
             #Velocities
-            #long_vel = Read_file["vel_longitudinal(m/s)"]
-            #lat_vel = Read_file["vel_lateral(m/s)"]
             east_vel = Read_file["vel_east(m/s)"]
             north_vel = Read_file["vel_north(m/s)"]
-            #heading = Read_file["heading(deg)"]
 
             #roll pitch yaw
-            #roll = Read_file["roll(deg)"]
             pitch = Read_file["pitch(deg)"]
-            #yaw = Read_file["yaw(deg"]
             yaw_rate = Read_file["yaw_rate(rad/s)"]
 
             #accerlerations
@@ -178,14 +167,10 @@ def return_values():
             I_limit = np.linspace(48,48,len(time)) #Make constant I_limit value into a vector with same size as a column of data in csv
 
             #Lateral Accerleration for IMU and V*YawRate
-            g = 9.81 #Gravity constant
             east_vel_squared = np.square(east_vel) #Compute square velocities for north and south
             north_vel_squared = np.square(north_vel)
             velocity = np.sqrt(east_vel_squared + north_vel_squared) #Get magnitude of velocity
-            radius = 30.5 / 2  #Path radius
             yaw_rate_deg = yaw_rate * 180/pi  #Convert yaw rate to degrees
-            AyEst1 = np.square(velocity) * radius / g  #V^2 /r
-            #AyEst2 = velocity * yaw_rate / g  #Velocity * Yaw rate
             omega_actual = -yaw_rate
 
             #GPS and wheel speed plot variables (RL, RR, FL, FR)
@@ -258,11 +243,8 @@ def return_values():
                     longitude_path = path_dict.get("Longitude (deg)")
                 
                     #Create variables to plot actual and desired path variables
-                    #RefLat = latitude_path[0]    #Set refernece value equal to first latitude value
-                    #RefLong = longitude_path[0]  #Set reference value equal to first longitude value
-                    RefLat = Mlat[0]    #Set refernece value equal to first latitude value
-                    RefLong = Mlong[0]  #Set reference value equal to first longitude value
-                        
+                    RefLat = Mlat[0]    #Set refernece value equal to first latitude value of desired path
+                    RefLong = Mlong[0]  #Set reference value equal to first longitude value of desired path
                         
                     def func_LL2NE(RefLat,RefLong, latitude, longitude): #Some conversion formula obtained from GeneSys documentation
                         e = 0.0818191908426; #Some constant
@@ -322,6 +304,7 @@ def return_values():
                     for item in x_axis.curselection() and y_axis.curselection(): #Filter items slected in x and y listboxes
                         keys = keys_list[item]       #Get key string
                         value = (dictionary[keys])   #Use key to get dict value
+                        
                         #Filtering parameters
                         dt = statistics.mode(np.diff(time)) #Cumpute mode of all delta t values
                         Fs = 1/dt                           #Use mode to compute frequency
