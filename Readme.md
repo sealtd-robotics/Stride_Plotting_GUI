@@ -15,7 +15,7 @@ In a new terminal, follow the steps below:
 ```
 where `myenv` is the name of the environment you want. 
 
-* Note: If you have multiple versions of Python, you can specify which versdion of python you want to use in your environment by adding `python=version` to the environemnt creation command. 
+* Note: If you have multiple versions of Python, you can specify which version of python you want to use in your environment by adding `python=version` to the environment creation command. 
 EX) `conda create --name nyenv python=3.6`.
 
 
@@ -38,7 +38,7 @@ The script_directory is the path of the folder containing Stride_Plotting_GUI.py
 
 Using the GUI
 ---
-The GUI will intially pop up showing 3 empty listboxes(labeled Select CSV Files, Select X axis variables, and Select Y axis variables) and 2 buttons (labeled 'Change Directory' and 'Read CSV').
+The GUI will initially pop up showing 3 empty listboxes(labeled Select CSV Files, Select X axis variables, and Select Y axis variables) and 2 buttons (labeled 'Change Directory' and 'Read CSV').
 
 1. The first thing you will want to do is click the 'Change Directory' button. This will prompt you to select the folder containing the CSV file(s) you want to get data from. Once you have navigated to your folder, click the confirmation button(could be 'select folder', 'open', 'ok', etc.).
 <br/>
@@ -57,7 +57,7 @@ The GUI will intially pop up showing 3 empty listboxes(labeled Select CSV Files,
 
 * Note: When you are done with the figure, close it to resume using the GUI. 
 
-6. If you would like to apply a filter to your selected data before plotting, then you can click the 'Filter' button and then plot/subplot as normal. This will update the values of items selected in the lisbox. If you deselect an item from the listbox, the variable will remain filtered even if reselect it. To remove the filter from the data you will need to click 'Read CSV' again and reselect listbox values. 
+6. If you would like to apply a filter to your selected data before plotting, then you can click the 'Filter' button and then plot/subplot as normal. This will update the values of items selected in the listbox. If you deselect an item from the listbox, the variable will remain filtered even if reselect it. To remove the filter from the data you will need to click 'Read CSV' again and reselect listbox values. 
 <br/> 
 
 7. If you would like to plot the Desired and Actual path of STRIDE, click the 'Select/Plot Path' button. You will be prompted to select the folder containing the path file (.txt) in the same way you selected a folder in step 1. Then you should see a window with the .txt files in the folder. Click the one you want and then press 'Open' (or double click the .txt file). A plot will automatically pop up in a new window for each CSV. 
@@ -69,24 +69,24 @@ The GUI will intially pop up showing 3 empty listboxes(labeled Select CSV Files,
 
 Looking at Plots
 ---
-The 'Select/Plot Path', 'Plot Y vs X', and 'Subplot Y vs X' buttons all use 'matplotlib' interactive plots to show data. You can hover your mouse over an icon to see what it does, and they are also described below:
+The 'Select/Plot Path', 'Plot Y vs X', and 'Subplot Y vs X' buttons all use 'Matplotlib' interactive plots to show data. You can hover your mouse over an icon to see what it does, and they are also described below:
 
 - Clicking the home button will reset the view of the plot to its original view.
 <br/>
 
-- The left and right arrow keys will allow you scroll throught the different views of the plot you have used (For example if you have zoomed in you can click the left arrow to zoom back out and then click the right arrow to zoom back in again).
+- The left and right arrow keys will allow you scroll through the different views of the plot you have used (For example if you have zoomed in you can click the left arrow to zoom back out and then click the right arrow to zoom back in again).
 <br/>
 
 - The 4 way arrow will allow you to pan or zoom in/out of the figure. Once this icon is selected, left click and drag to pan and right click and drag to zoom. 
 <br/>
 
-- The magnifying glass with allow you to zoom in to an area of the plot using a rectangle. Omce the icon is selected, Left click and drag on the plot to create a rectangle on where you want to zoom in.
+- The magnifying glass with allow you to zoom in to an area of the plot using a rectangle. Once the icon is selected, Left click and drag on the plot to create a rectangle on where you want to zoom in.
 <br/>
 
 - The 3 lines with dots will allow you to configure options for subplots, such as borders and spacing.
 <br/>
 
-- The line graph icon will allow you to set several axis and curve paramaters, such as axis start and end values, labels, scale, line styles, and markers. 
+- The line graph icon will allow you to set several axis and curve parameters, such as axis start and end values, labels, scale, line styles, and markers. 
 
     * Note: This button does not appear on linux for me (Matplotlib version 3.5.2). I'm not sure why.
 <br/>

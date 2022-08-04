@@ -36,7 +36,7 @@ my_frame = Frame(root)   #Create frame in root window
 x_axis_scrollbar = Scrollbar(my_frame, orient= VERTICAL)  #Create listbox scrollbar for x variable listbox
 y_frame = Frame(root) #Y variable listbox frame
 y_axis_scrollbar = Scrollbar(y_frame, orient= VERTICAL)  #Scrollbar for y variable listbox
-plot_button_frame = Frame(root)  #Plot buuton frame
+plot_button_frame = Frame(root)  #Plot button frame
 csv_frame = Frame(root)  #CSV file listbox frame
 csv_scrollbar = Scrollbar(csv_frame, orient= VERTICAL)    #Vertical scrollbar for csv listbox
 csv_scrollbar2 = Scrollbar(csv_frame, orient= HORIZONTAL) #Horizontal scrollbar for csv listbox
@@ -47,7 +47,7 @@ y_axis = Listbox(y_frame, width=25, yscrollcommand= y_axis_scrollbar.set, select
 CSV_listbox = Listbox(csv_frame,width=50, yscrollcommand = csv_scrollbar.set,selectmode= MULTIPLE, exportselection= 0)
 
 #Configure and pack listbox scrollbars
-x_axis_scrollbar.config(command= x_axis.yview) #Configure and pack both scrollbars
+x_axis_scrollbar.config(command= x_axis.yview) #Configure and pack scrollbars
 x_axis_scrollbar.pack(side=RIGHT, fill=Y)
 y_axis_scrollbar.config(command= y_axis.yview)
 y_axis_scrollbar.pack(side=RIGHT, fill=Y)
@@ -78,9 +78,9 @@ def change_directory():
     folder = fd.askdirectory(title="Select Folder") #Open directory
 
     #Populate CSV file listbox
-    CSV_listbox.delete(0,END)    #Clear CSV file listbox every time directory is chnaged
+    CSV_listbox.delete(0,END)    #Clear CSV file listbox every time directory is changed
     for f in os.listdir(folder): #For loop to look at files in selected directory and extract csv files
-        name, ext = os.path.splitext(f)   #Split file anem and extension
+        name, ext = os.path.splitext(f)   #Split file name and extension
         if ext == '.csv':   #Add only csv files to listbox
             CSV_listbox.insert(tk.END, f) #Add each csv file in selected directory to listbox
 
@@ -108,27 +108,28 @@ def return_values():
             time_milli = Read_file["utc_time(millisec)"] 
             time_milli = time_milli - time_milli[1]   #Convert time into seconds
             time = time_milli / 1000
-            #general_status= Read_file["general_status"]
-            #drive_status = Read_file["drive_status"]
 
             #Location Variables
-            #heading_unc = Read_file["heading_unc"]
             latitude = Read_file["latitude(deg)"]
             longitude = Read_file["longitude(deg)"]
             cross_track_error = Read_file["cte(m)"]
             adj_rpm_l = Read_file["adj_rpm_L"]
             adj_rpm_r = Read_file["adj_rpm_R"]
             heading = Read_file["heading(deg)"]
-
+            altitude = Read_file["altitude(m)"]
+            RTK_status= Read_file["RTK_status"]
+        
             #Velocities
             east_vel = Read_file["vel_east(m/s)"]
             north_vel = Read_file["vel_north(m/s)"]
+            vel_z = Read_file["vel_z(m/s)"]
 
             #roll pitch yaw
+            roll = Read_file["roll(deg)"]
             pitch = Read_file["pitch(deg)"]
             yaw_rate = Read_file["yaw_rate(rad/s)"]
 
-            #accerlerations
+            #accelerations
             accel_x = Read_file["Ax(m/s^2)"]
             accel_y = Read_file["Ay(m/s^2)"]
             accel_z = Read_file["Az(m/s^2)"]
@@ -166,7 +167,7 @@ def return_values():
             I_total = I_RL + I_RR + I_FL + I_FR    #Total current
             I_limit = np.linspace(48,48,len(time)) #Make constant I_limit value into a vector with same size as a column of data in csv
 
-            #Lateral Accerleration for IMU and V*YawRate
+            #Lateral Acceleration for IMU and V*YawRate
             east_vel_squared = np.square(east_vel) #Compute square velocities for north and south
             north_vel_squared = np.square(north_vel)
             velocity = np.sqrt(east_vel_squared + north_vel_squared) #Get magnitude of velocity
@@ -186,12 +187,12 @@ def return_values():
             
             #Create a dictionary for x and y axis variables
             var_dict = {'Time (sec)':time, "I_RL (A)": I_RL,"I_RR (A)":I_RR, "I_FL (A)":I_FL, "I_FR (A)":I_FR, "I_total (A)": I_total, "I_limit (A)": I_limit, "Ax (m/s^2)":accel_x,
-            "Ay (m/s^2)":accel_y, "Yaw Rate (rad/s)": yaw_rate, "Yaw Rate (deg)": yaw_rate_deg, "Actual Omega (rad/s)": omega_actual, "Desired Omega (rad/s)":desired_omega, "Desired Velocity (m/s)": desired_vel, 
-            "East_vel (m/s)":east_vel, "North_vel (m/s)":north_vel, "Velocity_Magnitude (m/s)":velocity, "Vel_RL (m/s)":vel_RL, "Vel_RR (m/s)": vel_RR, "Vel_FL (m/s)": vel_FL, "Vel_FR (m/s)": vel_FR, 
+            "Ay (m/s^2)":accel_y, "Az (m/s^2)": accel_z, "Altitude (m)": altitude, "Roll (deg)": roll, "Pitch (deg)": pitch, "Yaw Rate (rad/s)": yaw_rate, "Yaw Rate (deg)": yaw_rate_deg, "Actual Omega (rad/s)": omega_actual, "Desired Omega (rad/s)":desired_omega, "Desired Velocity (m/s)": desired_vel, 
+            "East_vel (m/s)":east_vel, "North_vel (m/s)":north_vel, "Vel_z (m/s)": vel_z, "Velocity_Magnitude (m/s)":velocity, "Vel_RL (m/s)":vel_RL, "Vel_RR (m/s)": vel_RR, "Vel_FL (m/s)": vel_FL, "Vel_FR (m/s)": vel_FR, 
             "Actual_RPM_RL":actual_RPM_RL, "Actual_RPM_RR":actual_RPM_RR, "Actual_RPM_FL":actual_RPM_FL, "Actual_RPM_FR":actual_RPM_FR, "Desired_RPM_RL":desired_RPM_RL, "Desired_RPM_RR":desired_RPM_RR, 
-            "Desired_RPM_FL":desired_RPM_FL, "Desired_RPM_FR":desired_RPM_FR, "Cross Track Error (m)":cross_track_error, "Left Wheel RPM adj": adj_rpm_l, "Right Wheel RPM adj": adj_rpm_r, "Battery_Temp (C)":bat_temp_C,
+            "Desired_RPM_FL":desired_RPM_FL, "Desired_RPM_FR":desired_RPM_FR, "Cross Track Error (m)":cross_track_error, "Left Wheel RPM adj": adj_rpm_l, "Right Wheel RPM adj": adj_rpm_r, "Battery Voltage (V)": bat_voltage, "Battery_Temp (C)":bat_temp_C,
             "Robot_Temp (C)":robot_temp_C, "Winding_Temp_RL (C)":wind_temp_RL, "Winding_Temp_RR (C)":wind_temp_RR, "Winding_Temp_FL (C)":wind_temp_FL, "Winding_Temp_FR (C)":wind_temp_FR, "Latitude (deg)":latitude, 
-            "Longitude (deg)":longitude, "Pitch (deg)": pitch, "Heading (deg)": heading}
+            "Longitude (deg)":longitude, "Heading (deg)": heading, "RTK_status": RTK_status}
            
             #For loop for adding variables to each listbox
             x_axis.delete(0,END)  #Delete listbox values and repopulate them so read csv button doesn't duplicate listbox entries
@@ -205,10 +206,10 @@ def return_values():
             #Function to plot selected variables
             dict_list.append(var_dict)  #Append the dictionary to a new spot in the dictionary list for each selected csv
             def select_vars():
-                #Loop throguh list of dictionaires to plot for each csv
+                #Loop through list of dictionaries to plot for each csv
                 count = 0
                 for dictionary in dict_list:
-                    for item in x_axis.curselection(): #For selcted items from x_axis listbox
+                    for item in x_axis.curselection(): #For selected items from x_axis listbox
                         keys = keys_list[item]         #Get key string
                         x_value = (dictionary[keys])   #Use key to get dict value
                         plt.xlabel(keys)
@@ -243,7 +244,7 @@ def return_values():
                     longitude_path = path_dict.get("Longitude (deg)")
                 
                     #Create variables to plot actual and desired path variables
-                    RefLat = Mlat[0]    #Set refernece value equal to first latitude value of desired path
+                    RefLat = Mlat[0]    #Set reference value equal to first latitude value of desired path
                     RefLong = Mlong[0]  #Set reference value equal to first longitude value of desired path
                         
                     def func_LL2NE(RefLat,RefLong, latitude, longitude): #Some conversion formula obtained from GeneSys documentation
@@ -255,9 +256,9 @@ def return_values():
                         Nfactor = (1-e**2)*R/((1-(np.square(sin(RefLat*pi/180))*e**2))*np.sqrt(1-(np.square(sin(RefLat*pi/180))*e**2)))*pi/180
                         col1 = Efactor * (longitude - RefLong)  #Apply east scale factor and put into column variable
                         col2 = Nfactor * (latitude - RefLat)    #Apply north scale factor and put into column variable
-                        return col1, col2   #Return values from each column as thier own variable
+                        return col1, col2   #Return values from each column as their own variable
 
-                    #Plot actual and dsired path
+                    #Plot actual and desired path
                     East, North = func_LL2NE(RefLat, RefLong, latitude_path, longitude_path) #Call function to apply scale factors to actual latitude/longitude
                     M_East, M_North = func_LL2NE(RefLat, RefLong, Mlat, Mlong) #Call function to apply scale factors to desired latitude/longitude
                     plt.figure()
@@ -278,7 +279,7 @@ def return_values():
             def make_subplot():
                 count = 0
                 for dictionary in dict_list:
-                    for item in x_axis.curselection(): #For selcted items from x_axis listbox
+                    for item in x_axis.curselection(): #For selected items from x_axis listbox
                         keys = keys_list[item]         #Get key string
                         x_value = (dictionary[keys])   #Use key to get dict values
                     i=1
@@ -301,15 +302,15 @@ def return_values():
             #Function to filter data by clicking button
             def Filter_data():
                 for dictionary in dict_list:
-                    for item in x_axis.curselection() and y_axis.curselection(): #Filter items slected in x and y listboxes
+                    for item in x_axis.curselection() and y_axis.curselection(): #Filter items selected in x and y listboxes
                         keys = keys_list[item]       #Get key string
                         value = (dictionary[keys])   #Use key to get dict value
-                        
+
                         #Filtering parameters
-                        dt = statistics.mode(np.diff(time)) #Cumpute mode of all delta t values
+                        dt = statistics.mode(np.diff(time)) #Compute mode of all delta t values
                         Fs = 1/dt                           #Use mode to compute frequency
                         b, a = signal.butter(4, 2/(Fs/2))   #Butterworth filter
-                        var_filtered = signal.filtfilt(b, a, value)   #Filter Each value sleected from x/y listboxes
+                        var_filtered = signal.filtfilt(b, a, value)   #Filter Each value selected from x/y listboxes
                         dictionary[keys]=var_filtered   #Replace dictionary values for each key filter
 
             #Adding more buttons to GUI at specific locations
@@ -326,7 +327,7 @@ def return_values():
             Subplot_Button.place(x=675,y=325)
             Filter_Button.place(x=675,y= 425)
 
-#Add textboxes above listboxes
+#Add text boxes above listboxes
 message1 = "Select X Axis Variable"   #Message above x variables
 message2 = "Select Y Axis Variables"  #Message above y variables
 message3 = "Select CSV Files" #Message above csv files
