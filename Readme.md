@@ -88,7 +88,11 @@ The 'Select/Plot Path', 'Plot Y vs X', and 'Subplot Y vs X' buttons all use 'Mat
 
 - The line graph icon will allow you to set several axis and curve parameters, such as axis start and end values, labels, scale, line styles, and markers. 
 
-    * Note: This button does not appear on linux for me (Matplotlib version 3.5.2). I'm not sure why.
+    * Note1: This button does not appear on linux for me (Matplotlib version 3.5.2). I'm not sure why.
+    <br/>
+
+    * Note 2: Rarely, (if plotting from multiple csv files at once) I've noticed changing colors/linestyles of one dataset makes other datasets swap colors and/or linestyles. The GUI itself is setup to provide different colors and linestyles. I don't recommend changing them in the interactive plot, as regenerating the legend may still have data labeled incorrectly, but if you want to do it, you are able to change the legend entries manually.
+
 <br/>
 
 - The last button is the save button, which will allow you to save the figure.
