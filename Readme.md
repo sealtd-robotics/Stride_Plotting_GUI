@@ -91,7 +91,7 @@ The 'Select/Plot Path', 'Plot Y vs X', and 'Subplot Y vs X' buttons all use 'Mat
     * Note1: This button does not appear on linux for me (Matplotlib version 3.5.2). I'm not sure why.
     <br/>
 
-    * Note 2: Rarely, (if plotting from multiple csv files at once) I've noticed changing colors/linestyles of one dataset makes other datasets swap colors and/or linestyles. The GUI itself is setup to provide different colors and linestyles. I don't recommend changing them in the interactive plot, as regenerating the legend may still have data labeled incorrectly, but if you want to do it, you are able to change the legend entries manually.
+    * Note 2: Rarely, (if plotting from multiple csv files at once) I've noticed changing colors/linestyles of one dataset makes other datasets swap colors and/or linestyles. The GUI itself is setup to provide different colors and linestyles. I don't recommend changing them in the interactive plot, as regenerating the legend may still have data labeled incorrectly, but if you want to do it, you are able to change the legend entries manually under the "curves" tab.
 
 <br/>
 
