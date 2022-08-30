@@ -120,14 +120,14 @@ def return_values():
             RTK_status= Read_file["RTK_status"]
             gnss_satellites = Read_file["gnss_satellites"]
             diff_age = Read_file["diff_age"]
-            lookahead = Read_file["lookahead(m)"]
+            # lookahead = Read_file["lookahead(m)"]
         
             #Velocities
             east_vel = Read_file["vel_east(m/s)"]
             north_vel = Read_file["vel_north(m/s)"]
             vel_z = Read_file["vel_z(m/s)"]
             vel_lateral = Read_file["vel_lateral(m/s)"]
-            vel_longitudinal = Read_file["vel_longitudinal(m/s)"]
+            vel_longitudinal = Read_file["vel_forward(m/s)"]
 
             #roll pitch yaw
             roll = Read_file["roll(deg)"]
@@ -168,12 +168,6 @@ def return_values():
             bat_temp = Read_file["battery_temp(C)"]
             robot_temp = Read_file["robot_temp(C)"]
 
-            #Error Codes
-            error_code_RL = Read_file["error_code_RL"]
-            error_code_RR = Read_file["error_code_RR"]
-            error_code_FL = Read_file["error_code_FL"]
-            error_code_FR = Read_file["error_code_FR"]
-
             #Variables for total and limit of current
             I_total = I_RL + I_RR + I_FL + I_FR    #Total current
             I_limit = np.linspace(48,48,len(time)) #Make constant I_limit value into a vector with same size as a column of data in csv
@@ -197,13 +191,14 @@ def return_values():
             robot_temp_C = (robot_temp - 32) * (5/9) 
             
             #Create a dictionary for x and y axis variables
-            var_dict = {'Time (sec)':time, "I_RL (A)": I_RL,"I_RR (A)":I_RR, "I_FL (A)":I_FL, "I_FR (A)":I_FR, "I_total (A)": I_total, "I_limit (A)": I_limit, "Ax (m/s^2)":accel_x,
-            "Ay (m/s^2)":accel_y, "Az (m/s^2)": accel_z, "Altitude (m)": altitude, "Roll (deg)": roll, "Pitch (deg)": pitch, "Yaw Rate (deg)": yaw_rate_deg,"Yaw Rate (rad/s)": yaw_rate, "Actual Omega (rad/s)": omega_actual, "Desired Omega (rad/s)":desired_omega, "Desired Velocity (m/s)": desired_vel, 
-            "Lateral_Velocity (m/s)": vel_lateral, "Longitudinal_Velocity (m/s)":vel_longitudinal, "East_vel (m/s)":east_vel, "North_vel (m/s)":north_vel, "Vel_z (m/s)": vel_z, "Velocity_Magnitude (m/s)":velocity, "Vel_RL (m/s)":vel_RL, "Vel_RR (m/s)": vel_RR, "Vel_FL (m/s)": vel_FL, "Vel_FR (m/s)": vel_FR, 
-            "Actual_RPM_RL":actual_RPM_RL, "Actual_RPM_RR":actual_RPM_RR, "Actual_RPM_FL":actual_RPM_FL, "Actual_RPM_FR":actual_RPM_FR, "Desired_RPM_RL":desired_RPM_RL, "Desired_RPM_RR":desired_RPM_RR, 
-            "Desired_RPM_FL":desired_RPM_FL, "Desired_RPM_FR":desired_RPM_FR, "Lookahead (m)": lookahead, "Cross Track Error (m)":cross_track_error, "Left Wheel RPM adj": adj_rpm_l, "Right Wheel RPM adj": adj_rpm_r, "Battery Voltage (V)": bat_voltage, "Battery_Temp (C)":bat_temp_C,
-            "Robot_Temp (C)":robot_temp_C, "Winding_Temp_RL (C)":wind_temp_RL, "Winding_Temp_RR (C)":wind_temp_RR, "Winding_Temp_FL (C)":wind_temp_FL, "Winding_Temp_FR (C)":wind_temp_FR, "Latitude (deg)":latitude, 
-            "Longitude (deg)":longitude, "Heading (deg)": heading, "RTK_status": RTK_status, "GNSS Satellites": gnss_satellites, "Differential_age":diff_age, "Error_Code_RL": error_code_RL, "Error_Code_RR":error_code_RR, "Error_Code_FL":error_code_FL, "Error_Code_FR": error_code_FR}
+            var_dict = {'Time (sec)':time, "GNSS Satellites": gnss_satellites, "Differential_age":diff_age, "RTK_status": RTK_status, "Latitude (deg)":latitude, "Longitude (deg)":longitude, "Altitude (m)": altitude,
+            "Forward_Velocity (m/s)":vel_longitudinal, "Lateral_Velocity (m/s)": vel_lateral, "Velocity_Magnitude (m/s)":velocity, "East_vel (m/s)":east_vel, "North_vel (m/s)":north_vel, "Vel_z (m/s)": vel_z,
+            "Heading (deg)": heading, "Roll (deg)": roll, "Pitch (deg)": pitch, "Ax (m/s^2)":accel_x, "Ay (m/s^2)":accel_y, "Az (m/s^2)": accel_z, "Yaw Rate (rad/s)": yaw_rate, "Yaw Rate (deg)": yaw_rate_deg, 
+            "Cross Track Error (m)":cross_track_error,"Desired Omega (rad/s)":desired_omega, "Actual Omega (rad/s)": omega_actual, "Desired Velocity (m/s)": desired_vel, "Vel_RL (m/s)":vel_RL, "Vel_RR (m/s)": vel_RR, "Vel_FL (m/s)": vel_FL, 
+            "Vel_FR (m/s)": vel_FR, "Desired_RPM_RL":desired_RPM_RL, "Actual_RPM_RL":actual_RPM_RL, "Desired_RPM_RR":desired_RPM_RR, "Actual_RPM_RR":actual_RPM_RR, "Desired_RPM_FL":desired_RPM_FL, "Actual_RPM_FL":actual_RPM_FL,
+            "Desired_RPM_FR":desired_RPM_FR, "Actual_RPM_FR":actual_RPM_FR, "Left Wheel RPM adj": adj_rpm_l, "Right Wheel RPM adj": adj_rpm_r, "I_RL (A)": I_RL,"I_RR (A)":I_RR, "I_FL (A)":I_FL, "I_FR (A)":I_FR, "I_total (A)": I_total,
+            "Winding_Temp_RL (C)":wind_temp_RL, "Winding_Temp_RR (C)":wind_temp_RR, "Winding_Temp_FL (C)":wind_temp_FL, "Winding_Temp_FR (C)":wind_temp_FR, "Battery Voltage (V)": bat_voltage, "Battery_Temp (C)":bat_temp_C, "Robot_Temp (C)":robot_temp_C, 
+            }
            
             #For loop for adding variables to each listbox
             x_axis.delete(0,END)  #Delete listbox values and repopulate them so read csv button doesn't duplicate listbox entries
@@ -248,7 +243,7 @@ def return_values():
                 Mlong = new_data[:,1]  #Assign 2nd column of data into variable
 
                 count = 0
-                for item in CSV_listbox.curselection():
+                for _ in CSV_listbox.curselection():
                     csv_name = values[count]
                     path_dict = dict_list[count]
                     latitude_path = path_dict.get("Latitude (deg)")
@@ -343,9 +338,9 @@ message1 = "Select X Axis Variable"   #Message above x variables
 message2 = "Select Y Axis Variables"  #Message above y variables
 message3 = "Select CSV Files" #Message above csv files
 text_box_1 = Text(root,height=1,width=25,borderwidth=0) #Set textbox properties
-text_box_1.place(x=437,y=90)  #Place textbox on tkiner window above x axis listbox
+text_box_1.place(x=437,y=90)  #Place textbox on tkinter window above x axis listbox
 text_box_1.insert('end', message1)  #Insert message to textbox
-text_box_1.config(state='disabled') #Make texbox uneditable
+text_box_1.config(state='disabled') #Make textbox uneditable
 text_box_2 = Text(root,height=1,width=25,borderwidth=0) #Repeat commands for placing text above y variable listbox
 text_box_2.place(x=693,y=90)
 text_box_2.insert('end', message2)
