@@ -120,7 +120,6 @@ def return_values():
             RTK_status= Read_file["RTK_status"]
             gnss_satellites = Read_file["gnss_satellites"]
             diff_age = Read_file["diff_age"]
-            # lookahead = Read_file["lookahead(m)"]
         
             #Velocities
             east_vel = Read_file["vel_east(m/s)"]
@@ -156,6 +155,7 @@ def return_values():
             I_RR = Read_file["actual_current_RR(A)"]
             I_FL = Read_file["actual_current_FL(A)"]
             I_FR = Read_file["actual_current_FR(A)"]
+            I_total = I_RL + I_RR + I_FL + I_FR    #Total current
 
             #Winding Temperatures
             wind_temp_RL = Read_file["winding_temp_RL(C)"]
@@ -167,10 +167,6 @@ def return_values():
             bat_voltage = Read_file["battery_voltage(V)"]
             bat_temp = Read_file["battery_temp(C)"]
             robot_temp = Read_file["robot_temp(C)"]
-
-            #Variables for total and limit of current
-            I_total = I_RL + I_RR + I_FL + I_FR    #Total current
-            I_limit = np.linspace(48,48,len(time)) #Make constant I_limit value into a vector with same size as a column of data in csv
 
             #Lateral Acceleration for IMU and V*YawRate
             east_vel_squared = np.square(east_vel) #Compute square velocities for north and south
@@ -226,6 +222,7 @@ def return_values():
                         remove_extension = os.path.splitext(values[count])[0]  #split extension from csv file name
                         plt.plot(x_value, y_value, label = remove_extension + "\n" + '*' + keys)  #Create Plot with csv filename and y_value labels
                     count = count + 1
+
                 #Show plot
                 plt.legend(bbox_to_anchor=(1.04,1), loc= "upper left") #Set legend to be outside of plot
                 plt.grid(True) #Add plot grid
@@ -279,6 +276,7 @@ def return_values():
                     plt.legend(bbox_to_anchor=(1.04,1), loc="upper left")       #Set legend to be outside of plot
                     plt.grid(True)
                     count = count + 1
+
                 plt.show()
 
             #Function to allow for subplotting
@@ -303,6 +301,7 @@ def return_values():
                         keys = keys_list[item]   #Get key string
                         plt.xlabel(keys)
                     count = count +1
+
                 plt.show()
 
             #Function to filter data by clicking button
