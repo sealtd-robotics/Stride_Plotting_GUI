@@ -187,7 +187,7 @@ def return_values():
             robot_temp_C = (robot_temp - 32) * (5/9) 
             
             #Create a dictionary for x and y axis variables
-            var_dict = {'Time (sec)':time, "GNSS Satellites": gnss_satellites, "Differential_age":diff_age, "RTK_status": RTK_status, "Latitude (deg)":latitude, "Longitude (deg)":longitude, "Altitude (m)": altitude,
+            var_dict = {'Time (sec)':time, "# of GNSS Satellites ": gnss_satellites, "Differential_age (ms)":diff_age, "RTK_status": RTK_status, "Latitude (deg)":latitude, "Longitude (deg)":longitude, "Altitude (m)": altitude,
             "Forward_Velocity (m/s)":vel_longitudinal, "Lateral_Velocity (m/s)": vel_lateral, "Velocity_Magnitude (m/s)":velocity, "East_vel (m/s)":east_vel, "North_vel (m/s)":north_vel, "Vel_z (m/s)": vel_z,
             "Heading (deg)": heading, "Roll (deg)": roll, "Pitch (deg)": pitch, "Ax (m/s^2)":accel_x, "Ay (m/s^2)":accel_y, "Az (m/s^2)": accel_z, "Yaw Rate (rad/s)": yaw_rate, "Yaw Rate (deg)": yaw_rate_deg, 
             "Cross Track Error (m)":cross_track_error,"Desired Omega (rad/s)":desired_omega, "Actual Omega (rad/s)": omega_actual, "Desired Velocity (m/s)": desired_vel, "Vel_RL (m/s)":vel_RL, "Vel_RR (m/s)": vel_RR, "Vel_FL (m/s)": vel_FL, 

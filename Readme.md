@@ -58,7 +58,7 @@ The GUI will initially pop up showing 3 empty listboxes(labeled Select CSV Files
 
 * Note: Close the figure after viewing it to resume using the GUI.
 
-6. To apply a filter to the selected data before plotting, click the 'Filter' button and then plot/subplot as normal. The filter type used is a 4th order, digital lowpass Butterworth filter, with a sampling frequency determined by the mode of time deltas and a cutoff frequency of 2Hz. This will update the values of items selected in the listbox. If an item from the listbox is deselected, the variable will remain filtered even if it is later reselected. To remove the filter from the data, click 'Read CSV' again and reselect listbox values
+6. To apply a filter to the selected data before plotting, click the 'Filter' button and then plot/subplot as normal. The filter type used is a 4th order, digital lowpass Butterworth filter, with a sampling frequency determined by the mode of time deltas and a cutoff frequency of 2Hz. This will update the values of items selected in the listbox. If a selected value has already been filtered, then clicking "Filter" again will apply the filter a 2nd time. If an item from the listbox is deselected, the variable will remain filtered even if it is later reselected. To remove the filter from the data, click 'Read CSV' again and reselect listbox values. 
 <br/> 
 
 7. To plot the Desired and Actual path of STRIDE, click the 'Select/Plot Path' button. Select the folder containing the path file (.txt) in the same way a folder was selected in Step 1. A window will appear with the .txt files in the folder. Click the desired file and then press 'Open' (or double click the .txt file). A plot will automatically pop up in a new window for each CSV.  
