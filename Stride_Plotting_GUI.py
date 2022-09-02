@@ -165,8 +165,8 @@ def return_values():
 
             #Battery and robot temps/voltage
             bat_voltage = Read_file["battery_voltage(V)"]
-            bat_temp = Read_file["battery_temp(C)"]
-            robot_temp = Read_file["robot_temp(C)"]
+            bat_temp = Read_file["battery_temp(F)"]
+            robot_temp = Read_file["robot_temp(F)"]
 
             #Lateral Acceleration for IMU and V*YawRate
             east_vel_squared = np.square(east_vel) #Compute square velocities for north and south
