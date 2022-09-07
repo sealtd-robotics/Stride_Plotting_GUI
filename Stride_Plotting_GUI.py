@@ -1,9 +1,8 @@
 ###Python Plotting
 
 #Import needed libraries
-from math import cos, pi, sin, sqrt
+from math import cos, pi, sin
 from itertools import count
-from operator import truediv
 import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
@@ -11,7 +10,6 @@ from scipy import signal
 import statistics
 from tkinter import *
 from tkinter import filedialog as fd
-from tkinter.messagebox import showinfo
 import tkinter as tk
 import tkinter.font as font
 import os
@@ -97,7 +95,7 @@ Directory_Button.place(x=75,y=425)
 
 #Read in selected csv files
 def return_values():
-        values = [CSV_listbox.get(idx) for idx in CSV_listbox.curselection()] #get list of names of each selected item in csv
+        values = [CSV_listbox.get(idx) for idx in CSV_listbox.curselection()] #Get list of names of each selected item in csv
         dict_list = [] #Initialize list of dictionaries for plotting/subplotting
         for item in values: #Access each element of the values list
             join_path = os.path.join(folder, item)   #Put directory and filename together with slash inbetween
@@ -128,17 +126,17 @@ def return_values():
             vel_lateral = Read_file["vel_lateral(m/s)"]
             vel_longitudinal = Read_file["vel_forward(m/s)"]
 
-            #roll pitch yaw
+            #Roll Pitch Yaw
             roll = Read_file["roll(deg)"]
             pitch = Read_file["pitch(deg)"]
             yaw_rate = Read_file["yaw_rate(rad/s)"]
 
-            #accelerations
+            #Accelerations
             accel_x = Read_file["Ax(m/s^2)"]
             accel_y = Read_file["Ay(m/s^2)"]
             accel_z = Read_file["Az(m/s^2)"]
 
-            #desired vs actual values
+            #Desired vs actual values
             desired_omega = Read_file["desired_omega(rad/s)"]
             desired_vel = Read_file["desired_velocity(m/s)"]
             actual_RPM_RL = Read_file["actual_rpm_RL"]
@@ -155,7 +153,7 @@ def return_values():
             I_RR = Read_file["actual_current_RR(A)"]
             I_FL = Read_file["actual_current_FL(A)"]
             I_FR = Read_file["actual_current_FR(A)"]
-            I_total = I_RL + I_RR + I_FL + I_FR    #Total current
+            I_total = I_RL + I_RR + I_FL + I_FR  #Total current
 
             #Winding Temperatures
             wind_temp_RL = Read_file["winding_temp_RL(C)"]
@@ -204,10 +202,11 @@ def return_values():
                 y_axis.insert(END, item) #Populate y axis listbox  
             keys_list = list(var_dict)   #Get list of keys from variable dictionary
 
-            x_axis.select_set(0) #This only sets focus on the first item.
-            #Function to plot selected variables
+            x_axis.select_set(0) #Select time in x_axis listbox by default
             dict_list.append(var_dict)  #Append the dictionary to a new spot in the dictionary list for each selected csv
-            def select_vars():
+
+            #Function to plot selected variables
+            def select_vars(): #Function to plot selected variables
                 #Loop through list of dictionaries to plot for each csv
                 count = 0
                 for dictionary in dict_list:
@@ -219,7 +218,7 @@ def return_values():
                     for item in y_axis.curselection(): #For selected items from y_axis listbox
                         keys = keys_list[item]         #Get key string
                         y_value = (dictionary[keys])   #Use key to get dict value
-                        remove_extension = os.path.splitext(values[count])[0]  #split extension from csv file name
+                        remove_extension = os.path.splitext(values[count])[0]  #Split extension from csv file name
                         plt.plot(x_value, y_value, label = remove_extension + "\n" + '*' + keys)  #Create Plot with csv filename and y_value labels
                     count = count + 1
 
@@ -234,6 +233,7 @@ def return_values():
                 filepath2 = fd.askopenfilename(title = "Select a TXT file",filetypes = (("TXT Files","*.txt"),))  #Get user to open the txt file
                 Filename_txt = os.path.basename(filepath2)  #Get file name from file path
                 join_path2 = os.path.join(folder2, Filename_txt) 
+                
                 with open(join_path2) as Path_file:
                     new_data = np.loadtxt(Path_file, skiprows=1)  #Skip header row of file
                 Mlat = new_data[:,0]   #Assign 1st column of data into variable
@@ -253,10 +253,12 @@ def return_values():
                     def func_LL2NE(RefLat,RefLong, latitude, longitude): #Some conversion formula obtained from GeneSys documentation
                         e = 0.0818191908426; #Some constant
                         R = 6378137; #Some constant
+
                         #Scale factor for longitude (deg) to East (m)
                         Efactor = cos(RefLat*pi/180)*pi/180*R/ np.sqrt(1-np.square((sin(RefLat*pi/180)))* e ** 2)
                         #Scale factor for latitude (deg) to North (m)
                         Nfactor = (1-e**2)*R/((1-(np.square(sin(RefLat*pi/180))*e**2))*np.sqrt(1-(np.square(sin(RefLat*pi/180))*e**2)))*pi/180
+
                         col1 = Efactor * (longitude - RefLong)  #Apply east scale factor and put into column variable
                         col2 = Nfactor * (latitude - RefLat)    #Apply north scale factor and put into column variable
                         return col1, col2   #Return values from each column as their own variable
