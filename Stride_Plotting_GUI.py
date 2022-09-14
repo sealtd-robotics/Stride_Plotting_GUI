@@ -166,6 +166,12 @@ def return_values():
             bat_temp = Read_file["battery_temp(F)"]
             robot_temp = Read_file["robot_temp(F)"]
 
+            #Subject Vehicle Variables
+            vehicle_speed = Read_file["vehicle_speed(m/s)"]
+            vehicle_latitude = Read_file["vehicle_latitude(deg)"]
+            vehicle_longitude = Read_file["vehicle_longitude(deg)"]
+            vehicle_heading = Read_file["vehicle_heading(deg)"]
+
             #Lateral Acceleration for IMU and V*YawRate
             east_vel_squared = np.square(east_vel) #Compute square velocities for north and south
             north_vel_squared = np.square(north_vel)
@@ -192,7 +198,7 @@ def return_values():
             "Vel_FR (m/s)": vel_FR, "Desired_RPM_RL":desired_RPM_RL, "Actual_RPM_RL":actual_RPM_RL, "Desired_RPM_RR":desired_RPM_RR, "Actual_RPM_RR":actual_RPM_RR, "Desired_RPM_FL":desired_RPM_FL, "Actual_RPM_FL":actual_RPM_FL,
             "Desired_RPM_FR":desired_RPM_FR, "Actual_RPM_FR":actual_RPM_FR, "Left Wheel RPM adj": adj_rpm_l, "Right Wheel RPM adj": adj_rpm_r, "I_RL (A)": I_RL,"I_RR (A)":I_RR, "I_FL (A)":I_FL, "I_FR (A)":I_FR, "I_total (A)": I_total,
             "Winding_Temp_RL (C)":wind_temp_RL, "Winding_Temp_RR (C)":wind_temp_RR, "Winding_Temp_FL (C)":wind_temp_FL, "Winding_Temp_FR (C)":wind_temp_FR, "Battery Voltage (V)": bat_voltage, "Battery_Temp (C)":bat_temp_C, "Robot_Temp (C)":robot_temp_C, 
-            }
+            "Vehicle Speed (m/s)": vehicle_speed, "Vehicle Latitude (deg)": vehicle_latitude, "Vehicle Longitude (deg)": vehicle_longitude, "Vehicle Heading (deg)": vehicle_heading}
            
             #For loop for adding variables to each listbox
             x_axis.delete(0,END)  #Delete listbox values and repopulate them so read csv button doesn't duplicate listbox entries
