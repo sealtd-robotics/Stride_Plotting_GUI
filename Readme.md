@@ -70,7 +70,10 @@ The GUI will initially pop up showing 3 empty listboxes(labeled Select CSV Files
 
 Looking at Plots
 ---
-The 'Select/Plot Path', 'Plot Y vs X', and 'Subplot Y vs X' buttons all use 'Matplotlib' interactive plots to show data. Hovering the cursor over an icon will display text which describes its function, but they are also described below: 
+The 'Select/Plot Path', 'Plot Y vs X', and 'Subplot Y vs X' buttons all use 'Matplotlib' interactive plots to show data. Hovering the cursor over an icon will display text which describes its function, but they are also described below. 
+
+- The coordinates of a point on a plot can be seen by hovering over a point on a curve and looking at the ‘X and Y’ values shown in the corner of the plot window. 
+<br/>
 
 - Clicking the home button will reset the view of the plot to its original view.
 <br/>
