@@ -191,14 +191,14 @@ def return_values():
             robot_temp_C = (robot_temp - 32) * (5/9) 
             
             #Create a dictionary for x and y axis variables
-            var_dict = {'Time (sec)':time, "# of GNSS Satellites ": gnss_satellites, "Differential_age (ms)":diff_age, "RTK_status": RTK_status, "Latitude (deg)":latitude, "Longitude (deg)":longitude, "Altitude (m)": altitude,
-            "Forward_Velocity (m/s)":vel_longitudinal, "Lateral_Velocity (m/s)": vel_lateral, "Velocity_Magnitude (m/s)":velocity, "East_vel (m/s)":east_vel, "North_vel (m/s)":north_vel, "Vel_z (m/s)": vel_z,
+            var_dict = {'Time (sec)':time, "GNSS Satellites ": gnss_satellites, "Differential age (ms)":diff_age, "RTK Status": RTK_status, "Latitude (deg)":latitude, "Longitude (deg)":longitude, "Altitude (m)": altitude,
+            "Forward Velocity (m/s)":vel_longitudinal, "Lateral Velocity (m/s)": vel_lateral, "Velocity Magnitude (m/s)":velocity, "East Velocity (m/s)":east_vel, "North Velocity (m/s)":north_vel, "Z-Direction Velocity (m/s)": vel_z,
             "Heading (deg)": heading, "Roll (deg)": roll, "Pitch (deg)": pitch, "Ax (m/s^2)":accel_x, "Ay (m/s^2)":accel_y, "Az (m/s^2)": accel_z, "Yaw Rate (rad/s)": yaw_rate, "Yaw Rate (deg)": yaw_rate_deg, 
-            "Cross Track Error (m)":cross_track_error,"Desired Omega (rad/s)":desired_omega, "Actual Omega (rad/s)": omega_actual, "Desired Velocity (m/s)": desired_vel, "Vel_RL (m/s)":vel_RL, "Vel_RR (m/s)": vel_RR, "Vel_FL (m/s)": vel_FL, 
-            "Vel_FR (m/s)": vel_FR, "Desired_RPM_RL":desired_RPM_RL, "Actual_RPM_RL":actual_RPM_RL, "Desired_RPM_RR":desired_RPM_RR, "Actual_RPM_RR":actual_RPM_RR, "Desired_RPM_FL":desired_RPM_FL, "Actual_RPM_FL":actual_RPM_FL,
-            "Desired_RPM_FR":desired_RPM_FR, "Actual_RPM_FR":actual_RPM_FR, "Left Wheel RPM adj": adj_rpm_l, "Right Wheel RPM adj": adj_rpm_r, "I_RL (A)": I_RL,"I_RR (A)":I_RR, "I_FL (A)":I_FL, "I_FR (A)":I_FR, "I_total (A)": I_total,
-            "Winding_Temp_RL (C)":wind_temp_RL, "Winding_Temp_RR (C)":wind_temp_RR, "Winding_Temp_FL (C)":wind_temp_FL, "Winding_Temp_FR (C)":wind_temp_FR, "Battery Voltage (V)": bat_voltage, "Battery_Temp (C)":bat_temp_C, "Robot_Temp (C)":robot_temp_C, 
-            "Vehicle Speed (m/s)": vehicle_speed, "Vehicle Latitude (deg)": vehicle_latitude, "Vehicle Longitude (deg)": vehicle_longitude, "Vehicle Heading (deg)": vehicle_heading}
+            "Cross Track Error (m)":cross_track_error,"Desired Omega (rad/s)":desired_omega, "Actual Omega (rad/s)": omega_actual, "Desired Velocity (m/s)": desired_vel, "Velocity RL (m/s)":vel_RL, "Velocity RR (m/s)": vel_RR, "Velocity FL (m/s)": vel_FL, 
+            "Velocity FR (m/s)": vel_FR, "Desired RPM RL":desired_RPM_RL, "Actual RPM RL":actual_RPM_RL, "Desired RPM RR":desired_RPM_RR, "Actual RPM RR":actual_RPM_RR, "Desired RPM FL":desired_RPM_FL, "Actual RPM FL":actual_RPM_FL,
+            "Desired RPM FR":desired_RPM_FR, "Actual RPM FR":actual_RPM_FR, "Left Wheel RPM adj": adj_rpm_l, "Right Wheel RPM adj": adj_rpm_r, "Actual Current RL (A)": I_RL,"Actual Current RR (A)":I_RR, "Actual Current FL (A)":I_FL, "Actual Current FR (A)":I_FR, 
+            "Total Current (A)": I_total, "Winding Temp RL (C)":wind_temp_RL, "Winding Temp RR (C)":wind_temp_RR, "Winding Temp FL (C)":wind_temp_FL, "Winding Temp FR (C)":wind_temp_FR, "Battery Voltage (V)": bat_voltage, "Battery Temp (C)":bat_temp_C, 
+            "Robot Temp (C)":robot_temp_C, "Vehicle Speed (m/s)": vehicle_speed, "Vehicle Latitude (deg)": vehicle_latitude, "Vehicle Longitude (deg)": vehicle_longitude, "Vehicle Heading (deg)": vehicle_heading}
            
             #For loop for adding variables to each listbox
             x_axis.delete(0,END)  #Delete listbox values and repopulate them so read csv button doesn't duplicate listbox entries
