@@ -16,7 +16,7 @@ In a new terminal, follow the steps below:
 where `myenv` is the desired name of the environment. 
 
 * Note: If there are multiple versions of Python installed on the computer, it is possible to specify which version of python to use in the environment by adding python=version to the environment creation command.  
-* Ex) `conda create --name myenv python=3.6`.
+* Ex: `conda create --name myenv python=3.6`.
 
 
 2. Install the following libraries one at a time with the commands below:
@@ -35,7 +35,7 @@ cd script_directory
 python Stride_Plotting_GUI.py
 ```
 The script_directory is the path of the folder containing Stride_Plotting_GUI.py. The GUI window should pop up. 
-* Ex) `cd C:\Stride\Python\Stride_Plotting_GUI`.
+* Ex: `cd C:\Stride\Python\Stride_Plotting_GUI`.
 
 Using the GUI
 ---
@@ -54,7 +54,7 @@ The GUI will initially pop up showing 3 empty listboxes(labeled Select CSV Files
 4. To plot or subplot data, select the desired x- and y-axis variables from the corresponding listboxes. The 'X Axis Variable' listbox allows one selection at a time, with the default selection being 'Time (sec)'. The 'Y Axis Variable' listbox allows the selection of as many variables as desired. Each selected variable in this listbox will be highlighted and clicking a variable again will deselect it.  
 <br/>
 
-5. Once the variables desired to plot have been selected, click the 'Plot Y vs X' button to see everything on one graph, or the 'Subplot Y vs X' button to see each selected variable as its own subplot. In each case a figure will pop up. The window should look something like the picture below. 
+5. Once the desired variables have been selected, click the 'Plot Y vs X' button to see everything on one graph, or the 'Subplot Y vs X' button to see each selected variable as its own subplot. In each case a figure will pop up. The window should look something like the picture below. 
 
 * Note: Close the figure after viewing it to resume using the GUI.
 
@@ -79,7 +79,7 @@ The 'Select/Plot Path', 'Plot Y vs X', and 'Subplot Y vs X' buttons all use 'Mat
 <br/>
 
 - The left and right arrow keys will scroll through the different views of the plot which have been used.  
-    *  Ex) If the plot has been zoomed in on, click the left arrow to zoom back out and then click the right arrow to zoom back in again.
+    *  Ex: If the plot has been zoomed in on, click the left arrow to zoom back out and then click the right arrow to zoom back in again.
 <br/>
 
 - The 4-way arrow will allow panning or zooming in/out of the figure. Once this icon is selected, left click and drag to pan and right click and drag to zoom. 
@@ -99,4 +99,4 @@ The 'Select/Plot Path', 'Plot Y vs X', and 'Subplot Y vs X' buttons all use 'Mat
     * Note 2: Rarely, (if plotting from multiple csv files at once) changing colors/line styles of one dataset makes other datasets swap colors and/or line styles. The GUI itself is set up to provide different colors and line styles. It is not recommended to change these in the interactive plot, as regenerating the legend may still have data labeled incorrectly. However, it is possible to change the legend entries manually, if desired. 
     <br/>
 
-- The last button is the save button, which will save the figure.
+- The last button is the save button, which will save the figure to a chosen location.
