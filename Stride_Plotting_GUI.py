@@ -183,6 +183,7 @@ def return_values():
             brake_status = Read_file["brake_status"]
             Left_Brake_fullyseated = Read_file["Left_Brake_fullyseated"]
             Right_Brake_fullyseated = Read_file["Right_Brake_fullyseated"]
+            disable_motors = Read_file["disable_motors"]
 
             #Lateral Acceleration for IMU and V*YawRate
             east_vel_squared = np.square(east_vel) #Compute square velocities for north and south
@@ -211,7 +212,7 @@ def return_values():
             "Desired RPM FR":desired_RPM_FR, "Actual RPM FR":actual_RPM_FR, "Left Wheel RPM adj": adj_rpm_l, "Right Wheel RPM adj": adj_rpm_r, "Actual Current RL (A)": I_RL,"Actual Current RR (A)":I_RR, "Actual Current FL (A)":I_FL, "Actual Current FR (A)":I_FR, 
             "Total Current (A)": I_total, "Winding Temp RL (C)":wind_temp_RL, "Winding Temp RR (C)":wind_temp_RR, "Winding Temp FL (C)":wind_temp_FL, "Winding Temp FR (C)":wind_temp_FR, "Battery Voltage (V)": bat_voltage, "Battery Temp (C)":bat_temp_C, 
             "Robot Temp (C)":robot_temp_C, "Vehicle Speed (m/s)": vehicle_speed, "Vehicle Latitude (deg)": vehicle_latitude, "Vehicle Longitude (deg)": vehicle_longitude, "Vehicle Heading (deg)": vehicle_heading,
-            "Brake Command":brake_command, "Brake Status":brake_status, "Left Brake Fullyseated":Left_Brake_fullyseated, "Right Brake Fullyseated":Right_Brake_fullyseated}
+            "Brake Command":brake_command, "Brake Status":brake_status, "Left Brake Fullyseated":Left_Brake_fullyseated, "Right Brake Fullyseated":Right_Brake_fullyseated, "Disable Motors":disable_motors}
            
             #For loop for adding variables to each listbox
             x_axis.delete(0,END)  #Delete listbox values and repopulate them so read csv button doesn't duplicate listbox entries
