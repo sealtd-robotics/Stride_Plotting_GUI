@@ -1,6 +1,10 @@
-# Stride Plotting GUI Instructions
+# STRIDE Plotting GUI Instructions
 
-This file is a walkthrough for how to setup and run the GUI for plotting Stride data.
+This file is a walkthrough for how to setup and run the GUI for plotting STRIDE data.
+
+**Note: For STRIDE with external brakes, switch to the external_brake branch of code instead.**
+
+![img1](./images/Switch_Code_Branch.png)
 
 Setup
 ---
