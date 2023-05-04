@@ -167,6 +167,12 @@ def return_values():
             wind_temp_FL = Read_file["winding_temp_FL(F)"]
             wind_temp_FR = Read_file["winding_temp_FR(F)"]
 
+            #Motor Controller Error Words
+            motor_error_code_RL = Read_file ("error_code_RL")
+            motor_error_code_RR = Read_file ("error_code_RR")
+            motor_error_code_FL = Read_file ("error_code_FL")
+            motor_error_code_FR = Read_file ("error_code_FR")
+
             #Battery and robot temps/voltage
             bat_voltage = Read_file["battery_voltage(V)"]
             bat_temp = Read_file["battery_temp(F)"]
@@ -200,15 +206,27 @@ def return_values():
             vel_FR = actual_RPM_FR * 2 * pi /60 * rwheel
             
             #Create a dictionary for x and y axis variables
-            var_dict = {'Time (sec)':time, "GNSS Satellites ": gnss_satellites, "Differential age (ms)":diff_age, "RTK Status": RTK_status, "Latitude (deg)":latitude, "Longitude (deg)":longitude, "Altitude (m)": altitude,
-            "Forward Velocity (m/s)":vel_longitudinal, "Lateral Velocity (m/s)": vel_lateral, "Velocity Magnitude (m/s)":velocity, "East Velocity (m/s)":east_vel, "North Velocity (m/s)":north_vel, "Z-Direction Velocity (m/s)": vel_z,
-            "Heading (deg)": heading, "Roll (deg)": roll, "Pitch (deg)": pitch, "Ax (g)":accel_x, "Ay (g)":accel_y, "Az (g)": accel_z, "Yaw Rate (rad/s)": yaw_rate, "Yaw Rate (deg)": yaw_rate_deg, 
-            "Cross Track Error (m)":cross_track_error,"Desired Omega (rad/s)":desired_omega, "Actual Omega (rad/s)": omega_actual, "Desired Velocity (m/s)": desired_vel, "Velocity RL (m/s)":vel_RL, "Velocity RR (m/s)": vel_RR, "Velocity FL (m/s)": vel_FL, 
-            "Velocity FR (m/s)": vel_FR, "Desired RPM RL":desired_RPM_RL, "Actual RPM RL":actual_RPM_RL, "Desired RPM RR":desired_RPM_RR, "Actual RPM RR":actual_RPM_RR, "Desired RPM FL":desired_RPM_FL, "Actual RPM FL":actual_RPM_FL,
-            "Desired RPM FR":desired_RPM_FR, "Actual RPM FR":actual_RPM_FR, "Left Wheel RPM adj": adj_rpm_l, "Right Wheel RPM adj": adj_rpm_r, "Actual Current RL (A)": I_RL,"Actual Current RR (A)":I_RR, "Actual Current FL (A)":I_FL, "Actual Current FR (A)":I_FR, 
-            "Total Current (A)": I_total, "Winding Temp RL (F)":wind_temp_RL, "Winding Temp RR (F)":wind_temp_RR, "Winding Temp FL (F)":wind_temp_FL, "Winding Temp FR (F)":wind_temp_FR, "Battery Voltage (V)": bat_voltage, "Battery Temp (F)":bat_temp, 
-            "Robot Temp (F)":robot_temp, "Vehicle Speed (m/s)": vehicle_speed, "Vehicle Latitude (deg)": vehicle_latitude, "Vehicle Longitude (deg)": vehicle_longitude, "Vehicle Heading (deg)": vehicle_heading,
-            "Brake Command":brake_command, "Brake Status":brake_status, "Left Brake Fullyseated":Left_Brake_fullyseated, "Right Brake Fullyseated":Right_Brake_fullyseated, "Disable Motors":disable_motors}
+            var_dict = {
+            'Time (sec)':time, 
+            "GNSS Satellites ": gnss_satellites, "Differential age (ms)":diff_age, "RTK Status": RTK_status, 
+            "Latitude (deg)":latitude, "Longitude (deg)":longitude, "Altitude (m)": altitude,
+            "Forward Velocity (m/s)":vel_longitudinal, "Lateral Velocity (m/s)": vel_lateral, "Velocity Magnitude (m/s)":velocity, 
+            "East Velocity (m/s)":east_vel, "North Velocity (m/s)":north_vel, "Z-Direction Velocity (m/s)": vel_z,
+            "Heading (deg)": heading, "Roll (deg)": roll, "Pitch (deg)": pitch, 
+            "Ax (g)":accel_x, "Ay (g)":accel_y, "Az (g)": accel_z, "Yaw Rate (rad/s)": yaw_rate, "Yaw Rate (deg)": yaw_rate_deg, 
+            "Cross Track Error (m)":cross_track_error,
+            "Desired Omega (rad/s)":desired_omega, "Actual Omega (rad/s)": omega_actual, "Desired Velocity (m/s)": desired_vel, 
+            "Velocity RL (m/s)":vel_RL, "Velocity RR (m/s)": vel_RR, "Velocity FL (m/s)": vel_FL, "Velocity FR (m/s)": vel_FR, 
+            "Desired RPM RL":desired_RPM_RL, "Actual RPM RL":actual_RPM_RL, "Desired RPM RR":desired_RPM_RR, "Actual RPM RR":actual_RPM_RR, 
+            "Desired RPM FL":desired_RPM_FL, "Actual RPM FL":actual_RPM_FL,"Desired RPM FR":desired_RPM_FR, "Actual RPM FR":actual_RPM_FR, 
+            "Left Wheel RPM adj": adj_rpm_l, "Right Wheel RPM adj": adj_rpm_r, 
+            "Actual Current RL (A)": I_RL,"Actual Current RR (A)":I_RR, "Actual Current FL (A)":I_FL, "Actual Current FR (A)":I_FR, "Total Current (A)": I_total, 
+            "Winding Temp RL (F)":wind_temp_RL, "Winding Temp RR (F)":wind_temp_RR, "Winding Temp FL (F)":wind_temp_FL, "Winding Temp FR (F)":wind_temp_FR, 
+            "Error_Word_RL": motor_error_code_RL, "Error_Word_RR": motor_error_code_RR, "Error_Word_FL": motor_error_code_FL, "Error_Word_FR": motor_error_code_FR,
+            "Battery Voltage (V)": bat_voltage, "Battery Temp (F)":bat_temp, "Robot Temp (F)":robot_temp, 
+            "Vehicle Speed (m/s)": vehicle_speed, "Vehicle Latitude (deg)": vehicle_latitude, "Vehicle Longitude (deg)": vehicle_longitude, "Vehicle Heading (deg)": vehicle_heading,
+            "Brake Command":brake_command, "Brake Status":brake_status, 
+            "Left Brake Fullyseated":Left_Brake_fullyseated, "Right Brake Fullyseated":Right_Brake_fullyseated, "Disable Motors":disable_motors }
            
             #For loop for adding variables to each listbox
             x_axis.delete(0,END)  #Delete listbox values and repopulate them so read csv button doesn't duplicate listbox entries
