@@ -168,10 +168,10 @@ def return_values():
             wind_temp_FR = Read_file["winding_temp_FR(F)"]
 
             #Motor Controller Error Words
-            motor_error_code_RL = Read_file ("error_code_RL")
-            motor_error_code_RR = Read_file ("error_code_RR")
-            motor_error_code_FL = Read_file ("error_code_FL")
-            motor_error_code_FR = Read_file ("error_code_FR")
+            motor_error_code_RL = Read_file["error_code_RL"]
+            motor_error_code_RR = Read_file["error_code_RR"]
+            motor_error_code_FL = Read_file["error_code_FL"]
+            motor_error_code_FR = Read_file["error_code_FR"]
 
             #Battery and robot temps/voltage
             bat_voltage = Read_file["battery_voltage(V)"]
