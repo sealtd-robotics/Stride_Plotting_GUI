@@ -109,7 +109,7 @@ def return_values():
 
             ### Pass each column of csv into its own variable
             #Time and status variables
-            time_milli = Read_file["utc_time(millisec)"] 
+            time_milli = Read_file["utc_time(ms)"] 
             time_milli = time_milli - time_milli[1]   #Convert time into seconds
             time = time_milli / 1000
 
@@ -123,7 +123,7 @@ def return_values():
             altitude = Read_file["altitude(m)"]
             RTK_status= Read_file["RTK_status"]
             gnss_satellites = Read_file["gnss_satellites"]
-            diff_age = Read_file["diff_age"]
+            diff_age = Read_file["diff_age(ms)"]
         
             #Velocities
             east_vel = Read_file["vel_east(m/s)"]
@@ -138,9 +138,9 @@ def return_values():
             yaw_rate = Read_file["yaw_rate(rad/s)"]
 
             #Accelerations
-            accel_x = Read_file["Ax(m/s^2)"]
-            accel_y = Read_file["Ay(m/s^2)"]
-            accel_z = Read_file["Az(m/s^2)"]
+            accel_x = Read_file["Ax(g)"]
+            accel_y = Read_file["Ay(g)"]
+            accel_z = Read_file["Az(g)"]
 
             #Desired vs actual values
             desired_omega = Read_file["desired_omega(rad/s)"]
@@ -162,10 +162,16 @@ def return_values():
             I_total = I_RL + I_RR + I_FL + I_FR  #Total current
 
             #Winding Temperatures
-            wind_temp_RL = Read_file["winding_temp_RL(C)"]
-            wind_temp_RR = Read_file["winding_temp_RR(C)"]
-            wind_temp_FL = Read_file["winding_temp_FL(C)"]
-            wind_temp_FR = Read_file["winding_temp_FR(C)"]
+            wind_temp_RL = Read_file["winding_temp_RL(F)"]
+            wind_temp_RR = Read_file["winding_temp_RR(F)"]
+            wind_temp_FL = Read_file["winding_temp_FL(F)"]
+            wind_temp_FR = Read_file["winding_temp_FR(F)"]
+
+            #Motor Controller Error Words
+            motor_error_code_RL = Read_file["error_code_RL"]
+            motor_error_code_RR = Read_file["error_code_RR"]
+            motor_error_code_FL = Read_file["error_code_FL"]
+            motor_error_code_FR = Read_file["error_code_FR"]
 
             #Battery and robot temps/voltage
             bat_voltage = Read_file["battery_voltage(V)"]
@@ -177,6 +183,13 @@ def return_values():
             vehicle_latitude = Read_file["vehicle_latitude(deg)"]
             vehicle_longitude = Read_file["vehicle_longitude(deg)"]
             vehicle_heading = Read_file["vehicle_heading(deg)"]
+
+            #Brake Variables
+            brake_command = Read_file["brake_command"]
+            brake_status = Read_file["brake_status"]
+            Left_Brake_fullyseated = Read_file["Left_Brake_fullyseated"]
+            Right_Brake_fullyseated = Read_file["Right_Brake_fullyseated"]
+            disable_motors = Read_file["disable_motors"]
 
             #Lateral Acceleration for IMU and V*YawRate
             east_vel_squared = np.square(east_vel) #Compute square velocities for north and south
@@ -191,20 +204,29 @@ def return_values():
             vel_RR = actual_RPM_RR * 2 * pi /60 * rwheel
             vel_FL = actual_RPM_FL * 2 * pi /60 * rwheel
             vel_FR = actual_RPM_FR * 2 * pi /60 * rwheel
-
-            #Convert bat and robot temps from F to C
-            bat_temp_C = (bat_temp - 32) * (5/9)   
-            robot_temp_C = (robot_temp - 32) * (5/9) 
             
             #Create a dictionary for x and y axis variables
-            var_dict = {'Time (sec)':time, "GNSS Satellites ": gnss_satellites, "Differential age (ms)":diff_age, "RTK Status": RTK_status, "Latitude (deg)":latitude, "Longitude (deg)":longitude, "Altitude (m)": altitude,
-            "Forward Velocity (m/s)":vel_longitudinal, "Lateral Velocity (m/s)": vel_lateral, "Velocity Magnitude (m/s)":velocity, "East Velocity (m/s)":east_vel, "North Velocity (m/s)":north_vel, "Z-Direction Velocity (m/s)": vel_z,
-            "Heading (deg)": heading, "Roll (deg)": roll, "Pitch (deg)": pitch, "Ax (m/s^2)":accel_x, "Ay (m/s^2)":accel_y, "Az (m/s^2)": accel_z, "Yaw Rate (rad/s)": yaw_rate, "Yaw Rate (deg)": yaw_rate_deg, 
-            "Cross Track Error (m)":cross_track_error,"Desired Omega (rad/s)":desired_omega, "Actual Omega (rad/s)": omega_actual, "Desired Velocity (m/s)": desired_vel, "Velocity RL (m/s)":vel_RL, "Velocity RR (m/s)": vel_RR, "Velocity FL (m/s)": vel_FL, 
-            "Velocity FR (m/s)": vel_FR, "Desired RPM RL":desired_RPM_RL, "Actual RPM RL":actual_RPM_RL, "Desired RPM RR":desired_RPM_RR, "Actual RPM RR":actual_RPM_RR, "Desired RPM FL":desired_RPM_FL, "Actual RPM FL":actual_RPM_FL,
-            "Desired RPM FR":desired_RPM_FR, "Actual RPM FR":actual_RPM_FR, "Left Wheel RPM adj": adj_rpm_l, "Right Wheel RPM adj": adj_rpm_r, "Actual Current RL (A)": I_RL,"Actual Current RR (A)":I_RR, "Actual Current FL (A)":I_FL, "Actual Current FR (A)":I_FR, 
-            "Total Current (A)": I_total, "Winding Temp RL (C)":wind_temp_RL, "Winding Temp RR (C)":wind_temp_RR, "Winding Temp FL (C)":wind_temp_FL, "Winding Temp FR (C)":wind_temp_FR, "Battery Voltage (V)": bat_voltage, "Battery Temp (C)":bat_temp_C, 
-            "Robot Temp (C)":robot_temp_C, "Vehicle Speed (m/s)": vehicle_speed, "Vehicle Latitude (deg)": vehicle_latitude, "Vehicle Longitude (deg)": vehicle_longitude, "Vehicle Heading (deg)": vehicle_heading}
+            var_dict = {
+            'Time (sec)':time, 
+            "GNSS Satellites ": gnss_satellites, "Differential age (ms)":diff_age, "RTK Status": RTK_status, 
+            "Latitude (deg)":latitude, "Longitude (deg)":longitude, "Altitude (m)": altitude,
+            "Forward Velocity (m/s)":vel_longitudinal, "Lateral Velocity (m/s)": vel_lateral, "Velocity Magnitude (m/s)":velocity, 
+            "East Velocity (m/s)":east_vel, "North Velocity (m/s)":north_vel, "Z-Direction Velocity (m/s)": vel_z,
+            "Heading (deg)": heading, "Roll (deg)": roll, "Pitch (deg)": pitch, 
+            "Ax (g)":accel_x, "Ay (g)":accel_y, "Az (g)": accel_z, "Yaw Rate (rad/s)": yaw_rate, "Yaw Rate (deg)": yaw_rate_deg, 
+            "Cross Track Error (m)":cross_track_error,
+            "Desired Omega (rad/s)":desired_omega, "Actual Omega (rad/s)": omega_actual, "Desired Velocity (m/s)": desired_vel, 
+            "Velocity RL (m/s)":vel_RL, "Velocity RR (m/s)": vel_RR, "Velocity FL (m/s)": vel_FL, "Velocity FR (m/s)": vel_FR, 
+            "Desired RPM RL":desired_RPM_RL, "Actual RPM RL":actual_RPM_RL, "Desired RPM RR":desired_RPM_RR, "Actual RPM RR":actual_RPM_RR, 
+            "Desired RPM FL":desired_RPM_FL, "Actual RPM FL":actual_RPM_FL,"Desired RPM FR":desired_RPM_FR, "Actual RPM FR":actual_RPM_FR, 
+            "Left Wheel RPM adj": adj_rpm_l, "Right Wheel RPM adj": adj_rpm_r, 
+            "Actual Current RL (A)": I_RL,"Actual Current RR (A)":I_RR, "Actual Current FL (A)":I_FL, "Actual Current FR (A)":I_FR, "Total Current (A)": I_total, 
+            "Winding Temp RL (F)":wind_temp_RL, "Winding Temp RR (F)":wind_temp_RR, "Winding Temp FL (F)":wind_temp_FL, "Winding Temp FR (F)":wind_temp_FR, 
+            "Error_Word_RL": motor_error_code_RL, "Error_Word_RR": motor_error_code_RR, "Error_Word_FL": motor_error_code_FL, "Error_Word_FR": motor_error_code_FR,
+            "Battery Voltage (V)": bat_voltage, "Battery Temp (F)":bat_temp, "Robot Temp (F)":robot_temp, 
+            "Vehicle Speed (m/s)": vehicle_speed, "Vehicle Latitude (deg)": vehicle_latitude, "Vehicle Longitude (deg)": vehicle_longitude, "Vehicle Heading (deg)": vehicle_heading,
+            "Brake Command":brake_command, "Brake Status":brake_status, 
+            "Left Brake Fullyseated":Left_Brake_fullyseated, "Right Brake Fullyseated":Right_Brake_fullyseated, "Disable Motors":disable_motors }
            
             #For loop for adding variables to each listbox
             x_axis.delete(0,END)  #Delete listbox values and repopulate them so read csv button doesn't duplicate listbox entries
