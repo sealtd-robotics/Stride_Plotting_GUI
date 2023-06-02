@@ -1,11 +1,5 @@
 # STRIDE Plotting GUI Instructions
 
-This file is a walkthrough for how to setup and run the GUI for plotting STRIDE data.
-
-**Note: For STRIDE with external brakes, switch to the external_brake branch of code instead.**
-
-![img1](./images/Switch_Code_Branch.png)
-
 Setup
 ---
 Requirements for Machine: Windows or Linux with Python 3 and Anaconda installed
@@ -34,7 +28,9 @@ pip install scipy
 Running the Program
 ---
 To run the program from the environment run the following lines: 
+
 ```
+conda activate myenv (like in step 1)
 cd script_directory
 python Stride_Plotting_GUI.py
 ```
