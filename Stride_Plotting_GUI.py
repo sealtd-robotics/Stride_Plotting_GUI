@@ -350,7 +350,7 @@ def return_values():
                         #Filtering parameters
                         dt = statistics.mode(np.diff(time)) #Compute mode of all delta t values
                         Fs = 1/dt                           #Use mode to compute frequency
-                        b, a = signal.butter(4, 2/(Fs/2))   #Butterworth filter
+                        b, a = signal.butter(4, 10/(Fs/2))   #Butterworth filter
                         var_filtered = signal.filtfilt(b, a, value)   #Filter Each value selected from x/y listboxes
                         dictionary[keys]=var_filtered   #Replace dictionary values for each key filter
 
