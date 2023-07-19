@@ -213,7 +213,7 @@ def return_values():
             "Forward Velocity (m/s)":vel_longitudinal, "Lateral Velocity (m/s)": vel_lateral, "Velocity Magnitude (m/s)":velocity, 
             "East Velocity (m/s)":east_vel, "North Velocity (m/s)":north_vel, "Z-Direction Velocity (m/s)": vel_z,
             "Heading (deg)": heading, "Roll (deg)": roll, "Pitch (deg)": pitch, 
-            "Ax (g)":accel_x, "Ay (g)":accel_y, "Az (g)": accel_z, "Yaw Rate (rad/s)": yaw_rate, "Yaw Rate (deg)": yaw_rate_deg, 
+            "Ax (g)":accel_x, "Ay (g)":accel_y, "Az (g)": accel_z, "Yaw Rate (rad/s)": yaw_rate, "Yaw Rate (deg/s)": yaw_rate_deg, 
             "Cross Track Error (m)":cross_track_error,
             "Desired Omega (rad/s)":desired_omega, "Actual Omega (rad/s)": omega_actual, "Desired Velocity (m/s)": desired_vel, 
             "Velocity RL (m/s)":vel_RL, "Velocity RR (m/s)": vel_RR, "Velocity FL (m/s)": vel_FL, "Velocity FR (m/s)": vel_FR, 
