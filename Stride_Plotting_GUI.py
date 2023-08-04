@@ -136,9 +136,9 @@ def return_values():
             roll = Read_file["roll(deg)"]
             pitch = Read_file["pitch(deg)"]
             yaw_rate = Read_file["yaw_rate(rad/s)"]
-            yaw_rate_deg = Read_file["yaw_rate(deg/s)"]
-            pitch_rate = Read_file["pitch_rate(deg/s)"]
-            roll_rate = Read_file["roll_rate(deg/s)"]
+            # yaw_rate_deg = Read_file["yaw_rate(deg/s)"]
+            # pitch_rate = Read_file["pitch_rate(deg/s)"]
+            # roll_rate = Read_file["roll_rate(deg/s)"]
 
             #Accelerations
             accel_x = Read_file["Ax(g)"]
