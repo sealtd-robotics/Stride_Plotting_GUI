@@ -186,6 +186,12 @@ def return_values():
             vehicle_latitude = Read_file["vehicle_latitude(deg)"]
             vehicle_longitude = Read_file["vehicle_longitude(deg)"]
             vehicle_heading = Read_file["vehicle_heading(deg)"]
+            vehicle_lateral_speed = Read_file["vehicle_lateral_speed(m/s)"]
+            vehicle_roll = Read_file["vehicle_roll(deg)"]
+            vehicle_pitch = Read_file["vehicle_pitch(deg)"]
+            vehicle_accel_x = Read_file["vehicle_accel_x(m/s^2)"]
+            vehicle_accel_y = Read_file["vehicle_accel_y(m/s^2)"]
+            vehicle_accel_z = Read_file["vehicle_accel_z(m/s^2)"]
 
             #Brake Variables
             brake_command = Read_file["brake_command"]
@@ -227,7 +233,9 @@ def return_values():
             "Winding Temp RL (F)":wind_temp_RL, "Winding Temp RR (F)":wind_temp_RR, "Winding Temp FL (F)":wind_temp_FL, "Winding Temp FR (F)":wind_temp_FR, 
             "Error_Word_RL": motor_error_code_RL, "Error_Word_RR": motor_error_code_RR, "Error_Word_FL": motor_error_code_FL, "Error_Word_FR": motor_error_code_FR,
             "Battery Voltage (V)": bat_voltage, "Battery Temp (F)":bat_temp, "Robot Temp (F)":robot_temp, 
-            "Vehicle Speed (m/s)": vehicle_speed, "Vehicle Latitude (deg)": vehicle_latitude, "Vehicle Longitude (deg)": vehicle_longitude, "Vehicle Heading (deg)": vehicle_heading,
+            "Vehicle Speed (m/s)": vehicle_speed, "Vehicle Lateral Speed (m/s)": vehicle_lateral_speed, "Vehicle Latitude (deg)": vehicle_latitude, "Vehicle Longitude (deg)": vehicle_longitude, 
+            "Vehicle Heading (deg)": vehicle_heading, "Vehicle Roll (deg)": vehicle_roll, "Vehicle_Pitch (deg)": vehicle_pitch, 
+            "Vehicle Acceleration X (m/s^2)": vehicle_accel_x, "Vehicle Acceleration Y (m/s^2)": vehicle_accel_y, "Vehicle Acceleration Z (m/s^2)": vehicle_accel_z,
             "Brake Command":brake_command, "Brake Status":brake_status, 
             "Left Brake Fullyseated":Left_Brake_fullyseated, "Right Brake Fullyseated":Right_Brake_fullyseated, "Disable Motors":disable_motors }
            
