@@ -186,6 +186,7 @@ def return_values():
             vehicle_latitude = Read_file["vehicle_latitude(deg)"]
             vehicle_longitude = Read_file["vehicle_longitude(deg)"]
             vehicle_heading = Read_file["vehicle_heading(deg)"]
+            vehicle_satellites = Read_file['vehicle_num_of_satellites']
             # vehicle_lateral_speed = Read_file["vehicle_lateral_speed(m/s)"]
             # vehicle_roll = Read_file["vehicle_roll(deg)"]
             # vehicle_pitch = Read_file["vehicle_pitch(deg)"]
@@ -236,7 +237,7 @@ def return_values():
             "Error_Word_RL": motor_error_code_RL, "Error_Word_RR": motor_error_code_RR, "Error_Word_FL": motor_error_code_FL, "Error_Word_FR": motor_error_code_FR,
             "Battery Voltage (V)": bat_voltage, "Battery Temp (F)":bat_temp, "Robot Temp (F)":robot_temp, 
             "Vehicle Speed (m/s)": vehicle_speed, "Vehicle Latitude (deg)": vehicle_latitude, "Vehicle Longitude (deg)": vehicle_longitude, 
-            "Vehicle Heading (deg)": vehicle_heading,
+            "Vehicle Heading (deg)": vehicle_heading, "Vehicle GNSS Satellites": vehicle_satellites,
             "Brake Command":brake_command, "Brake Status":brake_status, 
             "Disable Motors":disable_motors }
            
