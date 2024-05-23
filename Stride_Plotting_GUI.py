@@ -194,7 +194,8 @@ def return_values():
             # vehicle_accel_y = Read_file["vehicle_accel_y(m/s^2)"]
             # vehicle_accel_z = Read_file["vehicle_accel_z(m/s^2)"]
             # vehicle_brake = Read_file["vehicle_brake"]
-            # pressure_switch = Read_file["pressure_switch"]
+            pressure_switch = Read_file["pressure_switch"]
+
 
             #Brake Variables
             brake_command = Read_file["brake_command"]
@@ -237,7 +238,8 @@ def return_values():
             "Error_Word_RL": motor_error_code_RL, "Error_Word_RR": motor_error_code_RR, "Error_Word_FL": motor_error_code_FL, "Error_Word_FR": motor_error_code_FR,
             "Battery Voltage (V)": bat_voltage, "Battery Temp (F)":bat_temp, "Robot Temp (F)":robot_temp, 
             "Vehicle Speed (m/s)": vehicle_speed, "Vehicle Latitude (deg)": vehicle_latitude, "Vehicle Longitude (deg)": vehicle_longitude, 
-            "Vehicle Heading (deg)": vehicle_heading, "Vehicle GNSS Satellites": vehicle_satellites,
+            "Vehicle Heading (deg)": vehicle_heading, "Pressure Switch": pressure_switch,
+            "Vehicle GNSS Satellites": vehicle_satellites,
             "Brake Command":brake_command, "Brake Status":brake_status, 
             "Disable Motors":disable_motors }
            
