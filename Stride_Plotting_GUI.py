@@ -6,6 +6,8 @@
 # LICENSE file in the root directory of this source tree. 
 # ========================================================================
 
+#Code Version 1.3.1
+
 #Import needed libraries
 from math import cos, pi, sin
 from itertools import count
@@ -187,12 +189,6 @@ def return_values():
             vehicle_longitude = Read_file["vehicle_longitude(deg)"]
             vehicle_heading = Read_file["vehicle_heading(deg)"]
             vehicle_satellites = Read_file['vehicle_num_of_satellites']
-            # vehicle_lateral_speed = Read_file["vehicle_lateral_speed(m/s)"]
-            # vehicle_roll = Read_file["vehicle_roll(deg)"]
-            # vehicle_pitch = Read_file["vehicle_pitch(deg)"]
-            # vehicle_accel_x = Read_file["vehicle_accel_x(m/s^2)"]
-            # vehicle_accel_y = Read_file["vehicle_accel_y(m/s^2)"]
-            # vehicle_accel_z = Read_file["vehicle_accel_z(m/s^2)"]
             # vehicle_brake = Read_file["vehicle_brake"]
             pressure_switch = Read_file["pressure_switch"]
 
@@ -200,8 +196,6 @@ def return_values():
             #Brake Variables
             brake_command = Read_file["brake_command"]
             brake_status = Read_file["brake_status"]
-            # Left_Brake_fullyseated = Read_file["Left_Brake_fullyseated"]
-            # Right_Brake_fullyseated = Read_file["Right_Brake_fullyseated"]
             disable_motors = Read_file["disable_motors"]
 
             #Lateral Acceleration for IMU and V*YawRate
