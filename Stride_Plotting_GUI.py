@@ -6,6 +6,8 @@
 # LICENSE file in the root directory of this source tree. 
 # ========================================================================
 
+#Code Version 1.3.1
+
 #Import needed libraries
 from math import cos, pi, sin
 from itertools import count
@@ -136,9 +138,9 @@ def return_values():
             roll = Read_file["roll(deg)"]
             pitch = Read_file["pitch(deg)"]
             yaw_rate = Read_file["yaw_rate(rad/s)"]
-            # yaw_rate_deg = Read_file["yaw_rate(deg/s)"]
-            # pitch_rate = Read_file["pitch_rate(deg/s)"]
-            # roll_rate = Read_file["roll_rate(deg/s)"]
+            yaw_rate_deg = Read_file["yaw_rate(deg/s)"]
+            pitch_rate = Read_file["pitch_rate(deg/s)"]
+            roll_rate = Read_file["roll_rate(deg/s)"]
 
             #Accelerations
             accel_x = Read_file["Ax(g)"]
@@ -186,12 +188,14 @@ def return_values():
             vehicle_latitude = Read_file["vehicle_latitude(deg)"]
             vehicle_longitude = Read_file["vehicle_longitude(deg)"]
             vehicle_heading = Read_file["vehicle_heading(deg)"]
+            vehicle_satellites = Read_file['vehicle_num_of_satellites']
+            # vehicle_brake = Read_file["vehicle_brake"]
+            pressure_switch = Read_file["pressure_switch"]
+
 
             #Brake Variables
             brake_command = Read_file["brake_command"]
             brake_status = Read_file["brake_status"]
-            Left_Brake_fullyseated = Read_file["Left_Brake_fullyseated"]
-            Right_Brake_fullyseated = Read_file["Right_Brake_fullyseated"]
             disable_motors = Read_file["disable_motors"]
 
             #Lateral Acceleration for IMU and V*YawRate
@@ -216,7 +220,7 @@ def return_values():
             "East Velocity (m/s)":east_vel, "North Velocity (m/s)":north_vel, "Z-Direction Velocity (m/s)": vel_z,
             "Heading (deg)": heading, "Roll (deg)": roll, "Pitch (deg)": pitch, 
             "Ax (g)":accel_x, "Ay (g)":accel_y, "Az (g)": accel_z, "Yaw Rate (rad/s)": yaw_rate, 
-            # "Yaw Rate (deg/s)": yaw_rate_deg, "Pitch Rate (deg/s)": pitch_rate, "Roll Rate (deg/s)":roll_rate,
+            "Yaw Rate (deg/s)": yaw_rate_deg, "Pitch Rate (deg/s)": pitch_rate, "Roll Rate (deg/s)":roll_rate,
             "Cross Track Error (m)":cross_track_error,
             "Desired Omega (rad/s)":desired_omega, "Actual Omega (rad/s)": omega_actual, "Desired Velocity (m/s)": desired_vel, 
             "Velocity RL (m/s)":vel_RL, "Velocity RR (m/s)": vel_RR, "Velocity FL (m/s)": vel_FL, "Velocity FR (m/s)": vel_FR, 
@@ -227,9 +231,11 @@ def return_values():
             "Winding Temp RL (F)":wind_temp_RL, "Winding Temp RR (F)":wind_temp_RR, "Winding Temp FL (F)":wind_temp_FL, "Winding Temp FR (F)":wind_temp_FR, 
             "Error_Word_RL": motor_error_code_RL, "Error_Word_RR": motor_error_code_RR, "Error_Word_FL": motor_error_code_FL, "Error_Word_FR": motor_error_code_FR,
             "Battery Voltage (V)": bat_voltage, "Battery Temp (F)":bat_temp, "Robot Temp (F)":robot_temp, 
-            "Vehicle Speed (m/s)": vehicle_speed, "Vehicle Latitude (deg)": vehicle_latitude, "Vehicle Longitude (deg)": vehicle_longitude, "Vehicle Heading (deg)": vehicle_heading,
+            "Vehicle Speed (m/s)": vehicle_speed, "Vehicle Latitude (deg)": vehicle_latitude, "Vehicle Longitude (deg)": vehicle_longitude, 
+            "Vehicle Heading (deg)": vehicle_heading, "Pressure Switch": pressure_switch,
+            "Vehicle GNSS Satellites": vehicle_satellites,
             "Brake Command":brake_command, "Brake Status":brake_status, 
-            "Left Brake Fullyseated":Left_Brake_fullyseated, "Right Brake Fullyseated":Right_Brake_fullyseated, "Disable Motors":disable_motors }
+            "Disable Motors":disable_motors }
            
             #For loop for adding variables to each listbox
             x_axis.delete(0,END)  #Delete listbox values and repopulate them so read csv button doesn't duplicate listbox entries
