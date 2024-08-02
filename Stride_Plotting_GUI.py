@@ -188,6 +188,7 @@ def return_values():
             vehicle_latitude = Read_file["vehicle_latitude(deg)"]
             vehicle_longitude = Read_file["vehicle_longitude(deg)"]
             vehicle_heading = Read_file["vehicle_heading(deg)"]
+            vehicle_gps_status = Read_file["vehicle_gps_ready"]
             vehicle_satellites = Read_file['vehicle_num_of_satellites']
             # vehicle_brake = Read_file["vehicle_brake"]
             pressure_switch = Read_file["pressure_switch"]
@@ -232,10 +233,9 @@ def return_values():
             "Error_Word_RL": motor_error_code_RL, "Error_Word_RR": motor_error_code_RR, "Error_Word_FL": motor_error_code_FL, "Error_Word_FR": motor_error_code_FR,
             "Battery Voltage (V)": bat_voltage, "Battery Temp (F)":bat_temp, "Robot Temp (F)":robot_temp, 
             "Vehicle Speed (m/s)": vehicle_speed, "Vehicle Latitude (deg)": vehicle_latitude, "Vehicle Longitude (deg)": vehicle_longitude, 
-            "Vehicle Heading (deg)": vehicle_heading, "Pressure Switch": pressure_switch,
-            "Vehicle GNSS Satellites": vehicle_satellites,
-            "Brake Command":brake_command, "Brake Status":brake_status, 
-            "Disable Motors":disable_motors }
+            "Vehicle Heading (deg)": vehicle_heading, "Vehicle GPS Status": vehicle_gps_status, "Vehicle GNSS Satellites": vehicle_satellites, "Pressure Switch": pressure_switch,
+            "Brake Command":brake_command, "Brake Status":brake_status, "Disable Motors":disable_motors
+            }
            
             #For loop for adding variables to each listbox
             x_axis.delete(0,END)  #Delete listbox values and repopulate them so read csv button doesn't duplicate listbox entries
