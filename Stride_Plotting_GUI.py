@@ -193,6 +193,9 @@ def return_values():
             # vehicle_brake = Read_file["vehicle_brake"]
             pressure_switch = Read_file["pressure_switch"]
 
+            #Compensation
+            robot_dtc = Read_file["dtc(m)"]
+            vehicle_dtc = Read_file["vehicle_dtc(m)"]
 
             #Brake Variables
             brake_command = Read_file["brake_command"]
@@ -231,7 +234,7 @@ def return_values():
             "Actual Current RL (A)": I_RL,"Actual Current RR (A)":I_RR, "Actual Current FL (A)":I_FL, "Actual Current FR (A)":I_FR, "Total Current (A)": I_total, 
             "Winding Temp RL (F)":wind_temp_RL, "Winding Temp RR (F)":wind_temp_RR, "Winding Temp FL (F)":wind_temp_FL, "Winding Temp FR (F)":wind_temp_FR, 
             "Error_Word_RL": motor_error_code_RL, "Error_Word_RR": motor_error_code_RR, "Error_Word_FL": motor_error_code_FL, "Error_Word_FR": motor_error_code_FR,
-            "Battery Voltage (V)": bat_voltage, "Battery Temp (F)":bat_temp, "Robot Temp (F)":robot_temp, 
+            "Battery Voltage (V)": bat_voltage, "Battery Temp (F)":bat_temp, "Robot Temp (F)":robot_temp, "Robot DTC (m)": robot_dtc, "Vehicle DTC (m)": vehicle_dtc,
             "Vehicle Speed (m/s)": vehicle_speed, "Vehicle Latitude (deg)": vehicle_latitude, "Vehicle Longitude (deg)": vehicle_longitude, 
             "Vehicle Heading (deg)": vehicle_heading, "Vehicle GPS Status": vehicle_gps_status, "Vehicle GNSS Satellites": vehicle_satellites, "Pressure Switch": pressure_switch,
             "Brake Command":brake_command, "Brake Status":brake_status, "Disable Motors":disable_motors
@@ -268,7 +271,7 @@ def return_values():
                 #Show plot
                 plt.legend(bbox_to_anchor=(1.04,1), loc= "upper left") #Set legend to be outside of plot
                 plt.grid(True) #Add plot grid
-                plt.show() #Show plots           
+                plt.show() #Show plots   
 
             def select_txt_file():
                 pd.set_option('display.float_format', '{:.17f}'.format)  #Keep 17 decimal places like .txt file has
