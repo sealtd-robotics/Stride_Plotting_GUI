@@ -181,7 +181,8 @@ def return_values():
             #Battery and robot temps/voltage
             bat_voltage = Read_file["battery_voltage(V)"]
             bat_temp = Read_file["battery_temp(F)"]
-            robot_temp = Read_file["robot_temp(F)"]
+            robot_temp = Read_file["robot_temp_center(F)"]
+            robot_temp_comms = Read_file["robot_temp_comms(F)"]
 
             #Subject Vehicle Variables
             vehicle_speed = Read_file["vehicle_speed(m/s)"]
@@ -234,7 +235,7 @@ def return_values():
             "Actual Current RL (A)": I_RL,"Actual Current RR (A)":I_RR, "Actual Current FL (A)":I_FL, "Actual Current FR (A)":I_FR, "Total Current (A)": I_total, 
             "Winding Temp RL (F)":wind_temp_RL, "Winding Temp RR (F)":wind_temp_RR, "Winding Temp FL (F)":wind_temp_FL, "Winding Temp FR (F)":wind_temp_FR, 
             "Error_Word_RL": motor_error_code_RL, "Error_Word_RR": motor_error_code_RR, "Error_Word_FL": motor_error_code_FL, "Error_Word_FR": motor_error_code_FR,
-            "Battery Voltage (V)": bat_voltage, "Battery Temp (F)":bat_temp, "Robot Temp (F)":robot_temp, "Robot DTC (m)": robot_dtc, "Vehicle DTC (m)": vehicle_dtc,
+            "Battery Voltage (V)": bat_voltage, "Battery Temp (F)":bat_temp, "Robot Temp (F)":robot_temp, "Robot Temp Comms (F)": robot_temp_comms, "Robot DTC (m)": robot_dtc, "Vehicle DTC (m)": vehicle_dtc,
             "Vehicle Speed (m/s)": vehicle_speed, "Vehicle Latitude (deg)": vehicle_latitude, "Vehicle Longitude (deg)": vehicle_longitude, 
             "Vehicle Heading (deg)": vehicle_heading, "Vehicle GPS Status": vehicle_gps_status, "Vehicle GNSS Satellites": vehicle_satellites, "Pressure Switch": pressure_switch,
             "Brake Command":brake_command, "Brake Status":brake_status, "Disable Motors":disable_motors
